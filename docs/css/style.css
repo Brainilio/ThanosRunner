@@ -1,0 +1,68 @@
+body {  
+  background-color: black;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+score {  
+  margin:10px;
+  width:100%; height:100px;
+  position: absolute;
+  left:0px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2em;
+  line-height: 1.2em;
+  color:white;
+  z-index: 6;
+}
+
+thanos {  
+  position: absolute;
+  display: block;
+  background-image: url(http://img09.deviantart.net/80ee/i/2017/040/7/c/link_sprite_sheet_by_tiozacdasgalaxias-dayh0s6.png);
+  background-repeat: no-repeat;
+  width: 100px; height: 110px; 
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+  z-index: 5; 
+}
+
+space { 
+position: absolute;
+width: 100%;
+height: 100%; 
+background-image: url(../img/background.png);
+background-repeat: repeat;
+background-size: 100% 100%;
+z-index: 1;
+} 
+
+
+
+ground {  
+  position: absolute; 
+  width: 100%;
+  height: 100%;  
+  background-image: url("../img/ground.png");
+  background-repeat: repeat;
+  top: 500px;
+  z-index: 3;
+  
+}
+
+obstacle {  
+  position: absolute; 
+  display: block; 
+  background-color: red; 
+  width: 100px; 
+  height: 100px;
+  z-index: 5; 
+}
+
