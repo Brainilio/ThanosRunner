@@ -11,8 +11,11 @@ class Obstacle {
        this.element = document.createElement("obstacle") 
        document.body.appendChild(this.element)
 
-       this.x = 0; 
-       this.y = 450;
+       this.x = this.randomNumber(0, window.innerWidth-130); 
+       this.y = 300;
+    
+       this.xspeed = Math.floor(Math.random() * Math.floor(15));
+
     
       
        
@@ -36,6 +39,19 @@ class Obstacle {
    private startRight() { 
        
     this.x = this.x = this.element.getBoundingClientRect().width * -1;
+    
    }
+
+   randomNumber(min:number, max:number) {
+        let a:number = Math.floor(Math.random() * (max - min + 1) ) + min;
+        return a
+
+    }
+
+    public getRectangle() {
+        return this.element.getBoundingClientRect()
+    }
+
+
 
 }

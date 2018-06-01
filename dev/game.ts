@@ -5,33 +5,61 @@ class Game
     private thanos:Thanos;
     private background:background;
     private scoreElement:HTMLElement;
-    private obstacle:Obstacle;
+    private obstacle: Obstacle[]
+    public score:number = 0; 
 
-    
+
+
     constructor() {   
         this.scoreElement = document.createElement("score");
         document.body.appendChild(this.scoreElement);
-        this.scoreElement.innerHTML = "Score: 0" + "of 120"
+        this.scoreElement.innerHTML = "Score: 0 " + "of 120"
 
         console.log("Hallo");
-        this.obstacle = new Obstacle(); 
+        this.obstacle = []
+
+        for(let i = 0; i< Math.random(); i++) { 
+        let a = new Obstacle(); 
+        this.obstacle.push(a)
+        }
+
+        
         this.thanos = new Thanos(); 
         this.background = new background();
-        this.update()
+
+        this.gameLoop()
 
     }
 
-    public update() {  
+    public gameLoop() {  
         this.thanos.update();
         this.background.update();
-        this.obstacle.update();
 
-        for(let i = 0; i<30; i++) { 
-            this.scoreElement.innerHTML = "Score: " + i + " of 120"; 
+        for(let e of this.obstacle) { 
+                let hit = this.checkCollision(this.thanos.getRectangle(), e.getRectangle())
+                if(hit) {  
+                    this.score += 25
+                   this.scoreElement.innerHTML = "Score: " + this.score; 
+                }
+                if(this.score == 100) {  
+                    console.log("ik ben dood!");
+                }
+
+                e.update();
+        
+
+
         }
 
-        requestAnimationFrame( () => this.update())
+        requestAnimationFrame( () => this.gameLoop())
         
+    }
+
+    public checkCollision(a: ClientRect, b: ClientRect): boolean {
+        return (a.left <= b.right &&
+            b.left <= a.right &&
+            a.top <= b.bottom &&
+            b.top <= a.bottom)
     }
 
 }

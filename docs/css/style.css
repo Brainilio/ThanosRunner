@@ -34,6 +34,16 @@ thanos {
   z-index: 5; 
 }
 
+obstacle {  
+  position: absolute; 
+  display: block; 
+  background-image: url("../img/obstacle.png");
+  background-repeat: no-repeat;
+  width: 50%; 
+  height: 25%;
+  z-index: 5; 
+}
+
 space { 
 position: absolute;
 width: 100%;
@@ -57,12 +67,4 @@ ground {
   
 }
 
-obstacle {  
-  position: absolute; 
-  display: block; 
-  background-color: red; 
-  width: 100px; 
-  height: 100px;
-  z-index: 5; 
-}
 

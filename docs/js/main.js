@@ -24,24 +24,43 @@ var background = (function () {
 }());
 var Game = (function () {
     function Game() {
+        this.score = 0;
         this.scoreElement = document.createElement("score");
         document.body.appendChild(this.scoreElement);
-        this.scoreElement.innerHTML = "Score: 0" + "of 120";
+        this.scoreElement.innerHTML = "Score: 0 " + "of 120";
         console.log("Hallo");
-        this.obstacle = new Obstacle();
+        this.obstacle = [];
+        for (var i = 0; i < Math.random(); i++) {
+            var a = new Obstacle();
+            this.obstacle.push(a);
+        }
         this.thanos = new Thanos();
         this.background = new background();
-        this.update();
+        this.gameLoop();
     }
-    Game.prototype.update = function () {
+    Game.prototype.gameLoop = function () {
         var _this = this;
         this.thanos.update();
         this.background.update();
-        this.obstacle.update();
-        for (var i = 0; i < 30; i++) {
-            this.scoreElement.innerHTML = "Score: " + i + " of 120";
+        for (var _i = 0, _a = this.obstacle; _i < _a.length; _i++) {
+            var e = _a[_i];
+            var hit = this.checkCollision(this.thanos.getRectangle(), e.getRectangle());
+            if (hit) {
+                this.score += 25;
+                this.scoreElement.innerHTML = "Score: " + this.score;
+            }
+            if (this.score == 100) {
+                console.log("ik ben dood!");
+            }
+            e.update();
         }
-        requestAnimationFrame(function () { return _this.update(); });
+        requestAnimationFrame(function () { return _this.gameLoop(); });
+    };
+    Game.prototype.checkCollision = function (a, b) {
+        return (a.left <= b.right &&
+            b.left <= a.right &&
+            a.top <= b.bottom &&
+            b.top <= a.bottom);
     };
     return Game;
 }());
@@ -51,8 +70,9 @@ var Obstacle = (function () {
         this.xspeed = 0;
         this.element = document.createElement("obstacle");
         document.body.appendChild(this.element);
-        this.x = 0;
-        this.y = 450;
+        this.x = this.randomNumber(0, window.innerWidth - 130);
+        this.y = 300;
+        this.xspeed = Math.floor(Math.random() * Math.floor(15));
         this.startRight();
     }
     Obstacle.prototype.update = function () {
@@ -65,6 +85,13 @@ var Obstacle = (function () {
     };
     Obstacle.prototype.startRight = function () {
         this.x = this.x = this.element.getBoundingClientRect().width * -1;
+    };
+    Obstacle.prototype.randomNumber = function (min, max) {
+        var a = Math.floor(Math.random() * (max - min + 1)) + min;
+        return a;
+    };
+    Obstacle.prototype.getRectangle = function () {
+        return this.element.getBoundingClientRect();
     };
     return Obstacle;
 }());
@@ -125,6 +152,9 @@ var Thanos = (function () {
         this.htmlElement.style.left = this.x + "px";
         this.htmlElement.style.top = this.y + "px";
         requestAnimationFrame(function () { return _this.update(); });
+    };
+    Thanos.prototype.getRectangle = function () {
+        return this.htmlElement.getBoundingClientRect();
     };
     return Thanos;
 }());

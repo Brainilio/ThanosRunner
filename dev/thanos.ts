@@ -18,7 +18,7 @@ class Thanos {
 
                     protected htmlElement:HTMLElement; 
 
-                    constructor() { 
+                constructor() { 
                 
                         this.htmlElement = document.createElement("thanos");
                         document.body.appendChild(this.htmlElement);
@@ -85,6 +85,10 @@ class Thanos {
                         this.htmlElement.style.top = `${this.y}px`;
                         requestAnimationFrame(()=>this.update())
                        
+                    }
+
+                    public getRectangle() {
+                        return this.htmlElement.getBoundingClientRect()
                     }
 
                   
