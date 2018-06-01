@@ -5,8 +5,8 @@ class background {
 
 
 
-    private x:number = 0; 
-    private y:number = 0; 
+    private x:number = 30; 
+   
 
     protected ground:HTMLElement;
     protected space:HTMLElement

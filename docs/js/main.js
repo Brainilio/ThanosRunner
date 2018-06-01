@@ -2,8 +2,7 @@
 var background = (function () {
     function background() {
         this.speed = 0;
-        this.x = 0;
-        this.y = 0;
+        this.x = 30;
         this.ground = document.createElement("ground");
         document.body.appendChild(this.ground);
         this.space = document.createElement("space");
