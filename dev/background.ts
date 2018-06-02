@@ -18,6 +18,7 @@ class background {
         this.space = document.createElement("space")
         document.body.appendChild(this.space)
 
+        
 
         this.update();
 

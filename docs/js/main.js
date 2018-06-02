@@ -21,24 +21,23 @@ var background = (function () {
     };
     return background;
 }());
-var Game = (function () {
-    function Game() {
+var Playscreen = (function () {
+    function Playscreen(g) {
         this.score = 0;
+        this.game = g;
         this.scoreElement = document.createElement("score");
         document.body.appendChild(this.scoreElement);
         this.scoreElement.innerHTML = "Score: 0 " + "of 120";
         console.log("Hallo");
         this.obstacle = [];
-        for (var i = 0; i < Math.random(); i++) {
+        for (var i = 0; i < Math.random() * 20; i++) {
             var a = new Obstacle();
             this.obstacle.push(a);
         }
         this.thanos = new Thanos();
         this.background = new background();
-        this.gameLoop();
     }
-    Game.prototype.gameLoop = function () {
-        var _this = this;
+    Playscreen.prototype.update = function () {
         this.thanos.update();
         this.background.update();
         for (var _i = 0, _a = this.obstacle; _i < _a.length; _i++) {
@@ -53,15 +52,14 @@ var Game = (function () {
             }
             e.update();
         }
-        requestAnimationFrame(function () { return _this.gameLoop(); });
     };
-    Game.prototype.checkCollision = function (a, b) {
+    Playscreen.prototype.checkCollision = function (a, b) {
         return (a.left <= b.right &&
             b.left <= a.right &&
             a.top <= b.bottom &&
             b.top <= a.bottom);
     };
-    return Game;
+    return Playscreen;
 }());
 window.addEventListener("load", function () { return new Game(); });
 var Obstacle = (function () {
@@ -93,6 +91,47 @@ var Obstacle = (function () {
         return this.element.getBoundingClientRect();
     };
     return Obstacle;
+}());
+var Game = (function () {
+    function Game() {
+        this.screen = new Startscreen(this);
+        this.gameLoop();
+    }
+    Game.prototype.gameLoop = function () {
+        var _this = this;
+        this.screen.update();
+        requestAnimationFrame(function () { return _this.gameLoop(); });
+    };
+    Game.prototype.emptyScreen = function () {
+        var background = document.getElementsByTagName("background")[0];
+        background.innerHTML = "";
+        document.body.innerHTML = "";
+    };
+    Game.prototype.showPlayScreen = function (screen) {
+        this.screen = screen;
+        this.screen.update();
+    };
+    return Game;
+}());
+var Startscreen = (function () {
+    function Startscreen(g) {
+        var _this = this;
+        this.game = g;
+        var background = document.getElementsByTagName("background")[0];
+        this.element = document.createElement("START");
+        background.appendChild(this.element);
+        this.element.addEventListener("click", function () { return _this.clicked(); });
+        this.element.innerHTML = "HELP THANOS GET THE INFINITY STONES";
+        var logo = document.createElement("icon");
+        background.appendChild(logo);
+    }
+    Startscreen.prototype.update = function () {
+    };
+    Startscreen.prototype.clicked = function () {
+        this.game.emptyScreen();
+        this.game.showPlayScreen(new Playscreen(this.game));
+    };
+    return Startscreen;
 }());
 var Thanos = (function () {
     function Thanos() {

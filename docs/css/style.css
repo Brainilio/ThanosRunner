@@ -67,4 +67,38 @@ ground {
   
 }
 
+start {  
+    
+    margin: auto;
+    text-align: center;
+    border: 3px solid purple;
+    font-family: 'Press Start 2P', cursive;
+    color: white; 
+    padding: 20px;
+    position: fixed;
+    width: 50%;
+    left: 25%; 
+    top: 70%; 
+}
 
+start:hover { 
+  transition: background-color .5s;  
+  background-color: purple;
+}
+
+start:active {
+  background-color: pink;
+  box-shadow: 0 5px red;
+  transform: translateY(4px);
+}
+
+audio {  
+  display: block;
+  background-color: purple;
+  position: absolute;
+  background-image: url(../img/Thanos.png);
+  width: 25%;
+  left: 36%; 
+  top: 90%; 
+
+}
