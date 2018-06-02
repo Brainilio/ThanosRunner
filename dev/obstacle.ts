@@ -23,7 +23,11 @@ class Obstacle {
    }
 
    public update() {   
-   
+    let newY = this.y 
+
+
+        
+    if (newY > 0 && newY + 100 < window.innerHeight) this.y = newY
 
     this.x += this.xspeed;
 
