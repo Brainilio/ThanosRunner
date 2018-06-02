@@ -11,10 +11,10 @@ class Obstacle {
        this.element = document.createElement("obstacle") 
        document.body.appendChild(this.element)
 
-       this.x = this.randomNumber(0, window.innerWidth-130); 
+       this.x = this.randomNumber(0, window.innerWidth); 
        this.y = 300;
     
-       this.xspeed = Math.floor(Math.random() * Math.floor(15));
+       this.xspeed = Math.floor(Math.random() * Math.floor(-15));
 
     
       
@@ -23,11 +23,7 @@ class Obstacle {
    }
 
    public update() {   
-    let newY = this.y 
-
-
-        
-    if (newY > 0 && newY + 100 < window.innerHeight) this.y = newY
+   
 
     this.x += this.xspeed;
 
@@ -41,8 +37,8 @@ class Obstacle {
    }
 
    private startRight() { 
-       
-    this.x = this.x = this.element.getBoundingClientRect().width * -1;
+    
+    this.x = this.x = this.element.getBoundingClientRect().width * 1;
     
    }
 

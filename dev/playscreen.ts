@@ -5,27 +5,29 @@ class Playscreen
     private thanos:Thanos;
     private background:background;
     private scoreElement:HTMLElement;
-    private obstacle: Obstacle[]
-    public score:number = 0; 
+    
+    public score:number = 500; 
     private game: Game
+    private stars:Star[]
 
 
 
     constructor(g:Game) {   
+      
+        this.stars = []
+
         this.game = g
         this.scoreElement = document.createElement("score");
         document.body.appendChild(this.scoreElement);
-        this.scoreElement.innerHTML = "Score: 0 " + "of 120"
+        this.scoreElement.innerHTML = "Score: 500 " 
 
         console.log("Hallo");
-        this.obstacle = []
         
-            for(let i = 0; i<Math.random() * 20; i++) { 
-            let a = new Obstacle(); 
-            this.obstacle.push(a)
+        
            
-        
-        }
+            for(let i = 0; i<5; i++) {  
+                this.stars.push(new Star())
+            }
 
         
         this.thanos = new Thanos(); 
@@ -36,24 +38,26 @@ class Playscreen
 
 
 
-    public update() {  
+    public update() {
+        
+        
+        for(let b of this.stars) {
+            if (this.checkCollision(b.getRectangle(), this.thanos.getRectangle())) {
+                
+                this.score--
+                this.scoreElement.innerHTML = "Score: " + this.score;
+
+        }
+        b.update();
         this.thanos.update();
         this.background.update();
+    
 
-        for(let e of this.obstacle) { 
-                let hit = this.checkCollision(this.thanos.getRectangle(), e.getRectangle())
-                if(hit) {  
-                    this.score += 25
-                    this.scoreElement.innerHTML = "Score: " + this.score; 
-                }
-                if(this.score == 100) {  
-                    console.log("ik ben dood!");
-                }
-
-                e.update();
-        }   
     }
 
+      
+
+    }
     public checkCollision(a: ClientRect, b: ClientRect): boolean {
         return (a.left <= b.right &&
             b.left <= a.right &&
