@@ -3,9 +3,9 @@ class Star extends gameObject {
     private speedY:number 
     
         constructor() {  
-        super("star", Math.random() * (window.innerWidth + 50), Math.random() * (window.innerHeight - 100))
+        super("star", Math.floor(Math.random() * (window.innerWidth - 0 + 1) ) + 0, Math.random() * (window.innerHeight - 100))
         
-        this.speedX = -5
+        this.speedX = Math.floor(Math.random() * Math.floor(-15));
         this.speedY = Math.random() * 6 - 3 
         
 
@@ -43,5 +43,7 @@ class Star extends gameObject {
              this.y = (100 + Math.random() * (window.innerHeight - 100 - this.div.getBoundingClientRect().height));
     
             }
+
+            
 }
 

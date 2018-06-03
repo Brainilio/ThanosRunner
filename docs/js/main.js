@@ -96,12 +96,12 @@ var Obstacle = (function () {
 }());
 var Playscreen = (function () {
     function Playscreen(g) {
-        this.score = 0;
+        this.score = 500;
         this.stars = [];
         this.game = g;
         this.scoreElement = document.createElement("score");
         document.body.appendChild(this.scoreElement);
-        this.scoreElement.innerHTML = "Score: 0 " + "of 120";
+        this.scoreElement.innerHTML = "Score: 500 ";
         console.log("Hallo");
         for (var i = 0; i < 5; i++) {
             this.stars.push(new Star());
@@ -113,7 +113,7 @@ var Playscreen = (function () {
         for (var _i = 0, _a = this.stars; _i < _a.length; _i++) {
             var b = _a[_i];
             if (this.checkCollision(b.getRectangle(), this.thanos.getRectangle())) {
-                this.score++;
+                this.score--;
                 this.scoreElement.innerHTML = "Score: " + this.score;
             }
             b.update();

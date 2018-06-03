@@ -25,7 +25,7 @@ class Playscreen
         
         
            
-            for(let i = 0; i<5; i++) {  
+            for(let i = 0; i<1; i++) {  
                 this.stars.push(new Star())
             }
 
@@ -47,6 +47,12 @@ class Playscreen
                 this.score--
                 this.scoreElement.innerHTML = "Score: " + this.score;
 
+        }
+
+        if(this.score == 0) { 
+            this.game.emptyScreen(); 
+            this.game.showGameOver(new GameOver(this.game));
+            console.log("You died you fucking retard!")
         }
         b.update();
         this.thanos.update();

@@ -2,6 +2,7 @@ class gameObject {
     protected x: number
     protected y: number
     protected div: HTMLElement
+   
 
     constructor(el: any, x:number, y:number) { 
         this.x = x 
@@ -13,4 +14,6 @@ class gameObject {
     update() {   
         this.div.style.transform = `translate(${this.x}px, ${this.y}px`
     }
+
+    
 }

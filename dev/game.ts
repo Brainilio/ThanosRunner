@@ -26,4 +26,9 @@ class Game {
 
     }
 
+    showGameOver(screen:GameOver) {  
+        this.screen = screen
+        this.screen.update(); 
+    }
+
 }
