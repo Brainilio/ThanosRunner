@@ -32,6 +32,7 @@ class Startscreen {
     public update() { 
 
     }
+    
     private clicked() {  
         this.game.emptyScreen();
         this.game.showPlayScreen(new Playscreen(this.game))

@@ -9,28 +9,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var background = (function () {
-    function background() {
-        this.speed = 0;
-        this.x = 30;
-        this.ground = document.createElement("ground");
-        document.body.appendChild(this.ground);
-        this.space = document.createElement("space");
-        document.body.appendChild(this.space);
-        this.update();
-    }
-    background.prototype.loop = function () {
-        var _this = this;
-        this.x--;
-        this.ground.style.backgroundPosition = this.x + "px 0px";
-        this.space.style.backgroundPosition = this.x + "px 0px";
-        requestAnimationFrame(function () { return _this.update(); });
-    };
-    background.prototype.update = function () {
-        this.loop();
-    };
-    return background;
-}());
 var Game = (function () {
     function Game() {
         this.screen = new Startscreen(this);
@@ -50,6 +28,10 @@ var Game = (function () {
         this.screen = screen;
         this.screen.update();
     };
+    Game.prototype.showGameOver = function (screen) {
+        this.screen = screen;
+        this.screen.update();
+    };
     return Game;
 }());
 var gameObject = (function () {
@@ -63,6 +45,12 @@ var gameObject = (function () {
         this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px";
     };
     return gameObject;
+}());
+var GameOver = (function () {
+    function GameOver(g) {
+        this.game = g;
+    }
+    return GameOver;
 }());
 var Obstacle = (function () {
     function Obstacle() {
@@ -103,7 +91,7 @@ var Playscreen = (function () {
         document.body.appendChild(this.scoreElement);
         this.scoreElement.innerHTML = "Score: 500 ";
         console.log("Hallo");
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 1; i++) {
             this.stars.push(new Star());
         }
         this.thanos = new Thanos();
@@ -115,6 +103,11 @@ var Playscreen = (function () {
             if (this.checkCollision(b.getRectangle(), this.thanos.getRectangle())) {
                 this.score--;
                 this.scoreElement.innerHTML = "Score: " + this.score;
+            }
+            if (this.score == 0) {
+                this.game.emptyScreen();
+                this.game.showGameOver(new GameOver(this.game));
+                console.log("You died you fucking retard!");
             }
             b.update();
             this.thanos.update();
@@ -133,8 +126,8 @@ window.addEventListener("load", function () { return new Game(); });
 var Star = (function (_super) {
     __extends(Star, _super);
     function Star() {
-        var _this = _super.call(this, "star", Math.random() * (window.innerWidth + 50), Math.random() * (window.innerHeight - 100)) || this;
-        _this.speedX = -5;
+        var _this = _super.call(this, "star", Math.floor(Math.random() * (window.innerWidth - 0 + 1)) + 0, Math.random() * (window.innerHeight - 100)) || this;
+        _this.speedX = Math.floor(Math.random() * Math.floor(-15));
         _this.speedY = Math.random() * 6 - 3;
         return _this;
     }
@@ -150,10 +143,11 @@ var Star = (function (_super) {
         if (this.y > window.innerHeight) {
             this.startLeft();
         }
-        this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
+        this.div.style.left = this.x + "px";
+        this.div.style.top = this.y + "px";
     };
     Star.prototype.startLeft = function () {
-        this.x = this.x = this.div.getBoundingClientRect().width * 1;
+        this.x = this.x = this.div.getBoundingClientRect().width * -1;
         this.y = (100 + Math.random() * (window.innerHeight - 100 - this.div.getBoundingClientRect().height));
     };
     return Star;
@@ -178,43 +172,41 @@ var Startscreen = (function () {
     };
     return Startscreen;
 }());
-var Thanos = (function () {
+var Thanos = (function (_super) {
+    __extends(Thanos, _super);
     function Thanos() {
-        var _this = this;
-        this.speed = 0;
-        this.frames = 10;
-        this.frame = 0;
-        this.frameWidth = 102;
-        this.speedcounter = 0;
-        this.x = 0;
-        this.y = 0;
-        this.leftSpeed = 0;
-        this.rightSpeed = 0;
-        this.upSpeed = 0;
-        this.htmlElement = document.createElement("thanos");
-        document.body.appendChild(this.htmlElement);
-        this.frame = 0;
-        this.y = 450;
-        this.x = 450;
-        this.leftkey = 68;
-        this.rightkey = 65;
-        this.upkey = 32;
+        var _this = _super.call(this, "thanos", 0, 0) || this;
+        _this.speed = 0;
+        _this.frames = 10;
+        _this.frame = 0;
+        _this.frameWidth = 102;
+        _this.speedcounter = 0;
+        _this.leftSpeed = 0;
+        _this.rightSpeed = 0;
+        _this.upSpeed = 0;
+        _this.frame = 0;
+        _this.y = 450;
+        _this.x = 450;
+        _this.leftkey = 68;
+        _this.rightkey = 65;
+        _this.upkey = 32;
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
-        this.update();
+        _this.update();
+        return _this;
     }
     Thanos.prototype.onKeyDown = function (e) {
         switch (e.keyCode) {
             case this.rightkey:
-                this.leftSpeed = 5;
+                this.leftSpeed = 10;
                 console.log("ik klik iets");
                 break;
             case this.leftkey:
-                this.rightSpeed = 5;
+                this.rightSpeed = 10;
                 console.log("ik klik iets");
                 break;
             case this.upkey:
-                this.upSpeed = 3;
+                this.upSpeed = 10;
                 console.log("ik spring!");
         }
     };
@@ -248,16 +240,67 @@ var Thanos = (function () {
         if (this.frame >= this.frames)
             this.frame = 1;
         var pos = 0 - (this.frame * this.frameWidth);
-        this.htmlElement.style.backgroundPosition = pos + 'px -555px';
+        this.div.style.backgroundPosition = pos + 'px -555px';
         if (onkeyup) {
             this.frame = 0;
         }
-        this.htmlElement.style.left = this.x + "px";
-        this.htmlElement.style.top = this.y + "px";
+        this.div.style.left = this.x + "px";
+        this.div.style.top = this.y + "px";
     };
     Thanos.prototype.getRectangle = function () {
-        return this.htmlElement.getBoundingClientRect();
+        return this.div.getBoundingClientRect();
     };
     return Thanos;
+}(gameObject));
+var infiniteLoop = (function () {
+    function infiniteLoop(el, x, y) {
+        this.x = x;
+        this.y = y;
+        this.div = document.createElement(el);
+        document.body.appendChild(this.div);
+        console.log("hoi");
+    }
+    infiniteLoop.prototype.update = function () {
+        this.Loop();
+    };
+    infiniteLoop.prototype.Loop = function () {
+        var _this = this;
+        this.x--;
+        this.div.style.top = "translate(" + this.y + "px)";
+        this.div.style.backgroundPosition = this.x + "px 0px";
+        requestAnimationFrame(function () { return _this.update(); });
+    };
+    return infiniteLoop;
 }());
+var background = (function () {
+    function background() {
+        this.ground = new Ground();
+        this.space = new Space();
+    }
+    background.prototype.update = function () {
+        this.ground.update();
+        this.space.update();
+    };
+    return background;
+}());
+var Ground = (function (_super) {
+    __extends(Ground, _super);
+    function Ground() {
+        return _super.call(this, "ground", 30, innerHeight) || this;
+    }
+    Ground.prototype.update = function () {
+        _super.prototype.update.call(this);
+    };
+    return Ground;
+}(infiniteLoop));
+var Space = (function (_super) {
+    __extends(Space, _super);
+    function Space() {
+        return _super.call(this, "space", 30, innerHeight) || this;
+    }
+    Space.prototype.update = function () {
+        _super.prototype.update.call(this);
+    };
+    return Space;
+}(infiniteLoop));
 //# sourceMappingURL=main.js.map

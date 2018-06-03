@@ -1,4 +1,4 @@
-class Thanos {  
+class Thanos extends gameObject {  
 
                     protected speed:number = 0; 
             
@@ -6,9 +6,6 @@ class Thanos {
                     frame = 0
                     frameWidth = 102
                     speedcounter = 0
-
-                    private x:number = 0; 
-                    private y:number = 0; 
 
                     private leftkey: number;
                     private rightkey: number;
@@ -18,12 +15,11 @@ class Thanos {
                     private rightSpeed: number = 0 
                     private upSpeed: number = 0 
 
-                    protected htmlElement:HTMLElement; 
+                   
 
                 constructor() { 
-                
-                        this.htmlElement = document.createElement("thanos");
-                        document.body.appendChild(this.htmlElement);
+                    super("thanos", 0, 0)
+                       
                         
                         this.frame = 0                    
                         this.y = 450
@@ -45,15 +41,15 @@ class Thanos {
 
                         switch (e.keyCode) {
                                 case this.rightkey:
-                                    this.leftSpeed = 5
+                                    this.leftSpeed = 10
                                     console.log("ik klik iets")
                                 break 
                                 case this.leftkey: 
-                                    this.rightSpeed = 5
+                                    this.rightSpeed = 10
                                     console.log("ik klik iets")
                                 break 
                                 case this.upkey: 
-                                    this.upSpeed = 3
+                                    this.upSpeed = 10
                                     
                                     console.log("ik spring!")
 
@@ -90,22 +86,16 @@ class Thanos {
                             this.upSpeed = 0
                         }
 
-
-
-                        
-
-
                         if(this.x > window.innerWidth) {  
                             this.rightSpeed = 0
+                            
                         }
-
-
 
                         if(this.speedcounter%100 == 0) this.frame++
                         if(this.frame >= this.frames) this.frame = 1 
 
                             let pos = 0 - (this.frame*this.frameWidth)
-                            this.htmlElement.style.backgroundPosition = pos + 'px -555px'
+                            this.div.style.backgroundPosition = pos + 'px -555px'
 
 
                         
@@ -114,14 +104,18 @@ class Thanos {
                         }
                        
                        
-                        this.htmlElement.style.left = `${this.x}px`;
-                        this.htmlElement.style.top = `${this.y}px`;
+                        this.div.style.left = `${this.x}px`;
+                        this.div.style.top = `${this.y}px`;
                         
                        
                     }
 
+
+
+
+
                     public getRectangle() {
-                        return this.htmlElement.getBoundingClientRect()
+                        return this.div.getBoundingClientRect()
                     }
 
                   

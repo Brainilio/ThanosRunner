@@ -5,6 +5,6 @@ class GameOver {
         this.game = g
     }
 
-
+    
 
 }

@@ -1,3 +1,5 @@
+/// <reference path="gameObject.ts"/>
+
 class Star extends gameObject {   
     private speedX:number
     private speedY:number 
@@ -9,7 +11,10 @@ class Star extends gameObject {
         this.speedY = Math.random() * 6 - 3 
         
 
-                    }
+                }
+
+
+                
 
     public getRectangle(){
         return this.div.getBoundingClientRect()
@@ -31,7 +36,8 @@ class Star extends gameObject {
          } 
                     
                         
-        this.div.style.transform = `translate(${this.x}px, ${this.y}px)` 
+         this.div.style.left = `${this.x}px`;
+         this.div.style.top = `${this.y}px`;
 
 
                             }
@@ -39,7 +45,7 @@ class Star extends gameObject {
      private startLeft() {
              // plaats hem op min de breedte van de car zodat hij het scherm weer inrijdt
              // op random y positie
-             this.x = this.x = this.div.getBoundingClientRect().width * 1;
+             this.x = this.x = this.div.getBoundingClientRect().width * -1;
              this.y = (100 + Math.random() * (window.innerHeight - 100 - this.div.getBoundingClientRect().height));
     
             }
