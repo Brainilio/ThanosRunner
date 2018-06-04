@@ -11,7 +11,7 @@ class Thanos extends gameObject {
                     private rightkey: number;
                     private upkey: number; 
 
-                    private leftSpeed: number = 0 
+                    public leftSpeed: number = 0 
                     private rightSpeed: number = 0 
                     private upSpeed: number = 0 
 

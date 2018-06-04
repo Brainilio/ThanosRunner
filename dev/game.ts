@@ -15,8 +15,7 @@ class Game {
     }
 
     emptyScreen() {  
-        let background = document.getElementsByTagName("background")[0] 
-        background.innerHTML = ""
+        
         document.body.innerHTML = ""
     }
 
@@ -28,6 +27,11 @@ class Game {
 
     showGameOver(screen:GameOver) {  
         this.screen = screen
+        this.screen.update(); 
+    }
+
+    showStartScreen(screen: Startscreen) {  
+        this.screen = screen 
         this.screen.update(); 
     }
 

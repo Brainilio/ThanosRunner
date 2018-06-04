@@ -12,7 +12,7 @@ class Obstacle {
        document.body.appendChild(this.element)
 
        this.x = this.randomNumber(0, window.innerWidth); 
-       this.y = 300;
+       this.y = 400;
     
        this.xspeed = Math.floor(Math.random() * Math.floor(-15));
 
@@ -38,12 +38,12 @@ class Obstacle {
 
    private startRight() { 
     
-    this.x = this.x = this.element.getBoundingClientRect().width * 1;
+    this.x = this.x = this.element.getBoundingClientRect().width * 2;
     
    }
 
    randomNumber(min:number, max:number) {
-        let a:number = Math.floor(Math.random() * (max - min + 1) ) + min;
+        let a:number = Math.floor(Math.random() * (max - min + 3) ) + min;
         return a
 
     }
