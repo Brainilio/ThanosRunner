@@ -13,8 +13,8 @@ class Playscreen
     public life:number = 3; 
     private game: Game
     private stars:Star[] = []
-    private level:number = 0.0001; 
-    private tree:number = 0.1; 
+    private level:number = 0.01; 
+    private tree:number = 0.025; 
     private obstacle:Obstacle[] = []
     
 
