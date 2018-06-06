@@ -13,8 +13,8 @@ class Playscreen
     public life:number = 3; 
     private game: Game
     private stars:Star[] = []
-    private level:number = 0.01; 
-    private tree:number = 0.025; 
+    private level:number = 0.0001; 
+    private tree:number = 0.0025; 
     private obstacle:Obstacle[] = []
     
 
@@ -31,7 +31,7 @@ class Playscreen
         document.body.appendChild(this.scoreElement);
         this.scoreElement.innerHTML = "Score: 500 " 
 
-        console.log("Hallo");
+     
         
         
         this.thanos = new Thanos(); 
@@ -44,7 +44,13 @@ class Playscreen
 
     public update() {
 
-       
+         if (Math.random() < this.tree) {
+                    this.obstacle.push(new Obstacle());
+                }
+
+                if (Math.random() < this.level) {
+                    this.stars.push(new Star());
+                }
         
             for(let b of this.stars) { 
                 let hit = this.checkCollision(this.thanos.getRectangle(), b.getRectangle())
@@ -54,7 +60,7 @@ class Playscreen
                      this.scoreElement.innerHTML = "Score:  " + this.score
                      b.speedX += Math.random() * -3; 
                      b.speedY += Math.random() * -3; 
-                     b.dead(); 
+                     b.dead();
                      console.log("hoi!");
 
                     }
@@ -64,13 +70,12 @@ class Playscreen
                     this.game.showGameOver(new GameOver(this.game))
                 }}
 
-
+                
                 for(let e of this.obstacle) {           
                 if(this.checkCollision(this.thanos.getRectangle(), e.getRectangle()))
                     {
                         this.life+=1
                         this.lifeElement.innerHTML = "Life: " + this.life
-                        console.log("hi");
                         setTimeout(this.slow, 10000)
             
                     }
@@ -85,15 +90,7 @@ class Playscreen
 
 
 
-                if (Math.random() < this.tree) {
-                    this.obstacle.push(new Obstacle());
-                }
-
-                if (Math.random() < this.level) {
-                    this.stars.push(new Star());
-                }
-
-
+              
                 
     
             this.thanos.update();

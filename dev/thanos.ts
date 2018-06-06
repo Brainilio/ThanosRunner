@@ -1,4 +1,5 @@
-class Thanos extends gameObject {  
+/// <reference path="GameObject.ts"/>
+class Thanos extends GameObject {  
 
                     protected speed:number = 0; 
             
@@ -91,11 +92,21 @@ class Thanos extends gameObject {
                             
                         }
 
-                        if(this.speedcounter%100 == 0) this.frame++
+                        this.speedcounter++
+
+                        let framerate = 5
+                        if(this.speedcounter%framerate == 0) 
+                        { 
+                            this.frame++
+                            
+                        }
                         if(this.frame >= this.frames) this.frame = 1 
 
-                            let pos = 0 - (this.frame*this.frameWidth)
-                            this.div.style.backgroundPosition = pos + 'px -555px'
+                        console.log(this.frame);
+                        
+
+                        let pos = 0 - (this.frame*this.frameWidth)
+                        this.div.style.backgroundPosition = pos + 'px -555px'
 
 
                         

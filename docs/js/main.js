@@ -36,17 +36,17 @@ var Game = (function () {
     };
     return Game;
 }());
-var gameObject = (function () {
-    function gameObject(el, x, y) {
+var GameObject = (function () {
+    function GameObject(el, x, y) {
         this.x = x;
         this.y = y;
         this.div = document.createElement(el);
         document.body.appendChild(this.div);
     }
-    gameObject.prototype.update = function () {
+    GameObject.prototype.update = function () {
         this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px";
     };
-    return gameObject;
+    return GameObject;
 }());
 var GameOver = (function () {
     function GameOver(g) {
@@ -101,7 +101,7 @@ var Playscreen = (function () {
         this.life = 3;
         this.stars = [];
         this.level = 0.0001;
-        this.tree = 0.1;
+        this.tree = 0.0025;
         this.obstacle = [];
         this.game = g;
         this.lifeElement = document.createElement("life");
@@ -110,11 +110,16 @@ var Playscreen = (function () {
         this.scoreElement = document.createElement("score");
         document.body.appendChild(this.scoreElement);
         this.scoreElement.innerHTML = "Score: 500 ";
-        console.log("Hallo");
         this.thanos = new Thanos();
         this.background = new background();
     }
     Playscreen.prototype.update = function () {
+        if (Math.random() < this.tree) {
+            this.obstacle.push(new Obstacle());
+        }
+        if (Math.random() < this.level) {
+            this.stars.push(new Star());
+        }
         for (var _i = 0, _a = this.stars; _i < _a.length; _i++) {
             var b = _a[_i];
             var hit = this.checkCollision(this.thanos.getRectangle(), b.getRectangle());
@@ -137,7 +142,6 @@ var Playscreen = (function () {
             if (this.checkCollision(this.thanos.getRectangle(), e.getRectangle())) {
                 this.life += 1;
                 this.lifeElement.innerHTML = "Life: " + this.life;
-                console.log("hi");
                 setTimeout(this.slow, 10000);
             }
             e.update();
@@ -145,12 +149,6 @@ var Playscreen = (function () {
                 this.game.emptyScreen();
                 this.game.showStartScreen(new Startscreen(this.game));
             }
-        }
-        if (Math.random() < this.tree) {
-            this.obstacle.push(new Obstacle());
-        }
-        if (Math.random() < this.level) {
-            this.stars.push(new Star());
         }
         this.thanos.update();
         this.background.update();
@@ -167,6 +165,13 @@ var Playscreen = (function () {
     return Playscreen;
 }());
 window.addEventListener("load", function () { return new Game(); });
+var Sprite = (function (_super) {
+    __extends(Sprite, _super);
+    function Sprite() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return Sprite;
+}(GameObject));
 var Star = (function (_super) {
     __extends(Star, _super);
     function Star() {
@@ -192,14 +197,14 @@ var Star = (function (_super) {
         this.div.style.top = this.y + "px";
     };
     Star.prototype.dead = function () {
-        this.div.classList.add("dead");
+        this.div.remove();
     };
     Star.prototype.startLeft = function () {
         this.x = this.x = this.div.getBoundingClientRect().width * -1;
         this.y = (100 + Math.random() * (window.innerHeight - 100 - this.div.getBoundingClientRect().height));
     };
     return Star;
-}(gameObject));
+}(GameObject));
 var Startscreen = (function () {
     function Startscreen(g) {
         var _this = this;
@@ -282,10 +287,14 @@ var Thanos = (function (_super) {
         if (this.x > window.innerWidth) {
             this.rightSpeed = 0;
         }
-        if (this.speedcounter % 100 == 0)
+        this.speedcounter++;
+        var framerate = 5;
+        if (this.speedcounter % framerate == 0) {
             this.frame++;
+        }
         if (this.frame >= this.frames)
             this.frame = 1;
+        console.log(this.frame);
         var pos = 0 - (this.frame * this.frameWidth);
         this.div.style.backgroundPosition = pos + 'px -555px';
         if (onkeyup) {
@@ -298,7 +307,7 @@ var Thanos = (function (_super) {
         return this.div.getBoundingClientRect();
     };
     return Thanos;
-}(gameObject));
+}(GameObject));
 var infiniteLoop = (function () {
     function infiniteLoop(el, x, y) {
         this.xSpeed = 15;

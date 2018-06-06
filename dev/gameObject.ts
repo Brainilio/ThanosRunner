@@ -1,4 +1,4 @@
-class gameObject {  
+class GameObject {  
     protected x: number
     protected y: number
     protected div: HTMLElement

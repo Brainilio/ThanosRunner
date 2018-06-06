@@ -1,6 +1,6 @@
 /// <reference path="gameObject.ts"/>
 
-class Star extends gameObject {   
+class Star extends GameObject {   
     public speedX:number
     public speedY:number 
     
@@ -43,10 +43,10 @@ class Star extends gameObject {
                             }
 
             public dead() {  
-                    this.div.classList.add("dead")
+                    this.div.remove(); 
                 }
 
-     private startLeft() {
+             private startLeft() {
              // plaats hem op min de breedte van de car zodat hij het scherm weer inrijdt
              // op random y positie
              this.x = this.x = this.div.getBoundingClientRect().width * -1;
