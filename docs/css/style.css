@@ -1,104 +1,102 @@
-body,html {  
+body,
+html {
   background-color: black;
   height: 100%;
   width: 100%;
- 
-  
 }
-
 
 * {
   box-sizing: border-box;
 }
 
-score {  
-  margin:10px;
-  width:100%; height:100px;
+score {
+  margin: 10px;
+  width: 100%;
+  height: 100px;
   position: absolute;
-  left:0px;
-  font-family: 'Press Start 2P', cursive;
+  left: 0px;
+  font-family: "Press Start 2P", cursive;
   font-size: 2em;
   line-height: 1.2em;
-  color:white;
+  color: white;
   z-index: 6;
 }
 
-life {  
-  margin:10px;
-  width:100%; height:100px;
+life {
+  margin: 10px;
+  width: 100%;
+  height: 100px;
   position: absolute;
-  left:-450px;
-  font-family: 'Press Start 2P', cursive;
+  left: 800px;
+  font-family: "Press Start 2P", cursive;
   font-size: 2em;
   line-height: 1.2em;
-  color:white;
+  color: white;
   z-index: 6;
 }
 
-thanos {  
+thanos {
   position: absolute;
   display: block;
   background-image: url(http://img09.deviantart.net/80ee/i/2017/040/7/c/link_sprite_sheet_by_tiozacdasgalaxias-dayh0s6.png);
   background-repeat: no-repeat;
-  width: 90px; height: 110px; 
+  width: 90px;
+  height: 110px;
   -moz-transform: scaleX(-1);
   -o-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
   filter: FlipH;
   -ms-filter: "FlipH";
-  z-index: 5; 
+  z-index: 5;
 }
 
-obstacle {  
-  position: absolute; 
-  display: block; 
+obstacle {
+  position: absolute;
+  display: block;
   background-image: url("../img/rock.png");
   background-repeat: no-repeat;
-  width: 50%; 
+  width: 50%;
   height: 25%;
-  z-index: 3; 
+  z-index: 3;
 }
 
-space { 
-position: absolute;
-width: 100%;
-height: 100%; 
-background-image: url(../img/background.png);
-background-repeat: repeat;
-background-size: 100% 100%;
-z-index: 1;
-} 
-
-
-
-ground {  
-  position: absolute; 
+space {
+  position: absolute;
   width: 100%;
-  height: 40%;  
+  height: 50%;
+  top: 80px;
+  background-image: url(../img/background.png);
+  background-repeat: repeat;
+  background-size: 100% 100%;
+  z-index: 1;
+}
+
+ground {
+  position: absolute;
+  width: 100%;
+  height: 80%;
   background-image: url("../img/ground.png");
   background-repeat: repeat-x;
-  top: 500px;
+  top: 50px;
   z-index: 2;
-  
 }
 
-start {  
-    
-    margin: auto;
-    text-align: center;
-    border: 3px solid purple;
-    font-family: 'Press Start 2P', cursive;
-    color: white; 
-    padding: 20px;
-    position: fixed;
-    width: 50%;
-    left: 25%; 
-    top: 70%; 
+start {
+  margin: auto;
+  text-align: center;
+  border: 3px solid purple;
+  font-family: "Press Start 2P", cursive;
+  color: white;
+  padding: 20px;
+  position: fixed;
+  width: 50%;
+  left: 25%;
+  top: 70%;
 }
 
-start:hover { 
-  transition: background-color .5s;  
+start:hover {
+  transition: background-color 0.5s;
   background-color: purple;
 }
 
@@ -108,36 +106,33 @@ start:active {
   transform: translateY(4px);
 }
 
-audio {  
+audio {
   display: block;
   background-color: purple;
   position: absolute;
   background-image: url(../img/Thanos.png);
   width: 25%;
-  left: 36%; 
-  top: 90%; 
-
+  left: 36%;
+  top: 90%;
 }
 
-star {  
-  display: block; 
+star {
+  display: block;
   position: absolute;
   width: 200px;
   height: 150px;
-  z-index: 3; 
-  background-image: url(../img/fire.png)
+  z-index: 3;
+  background-image: url(../img/fire.png);
 }
 
-background {  
-  background-image: url(../img/background.png); 
+background {
+  background-image: url(../img/background.png);
   z-index: 3;
 }
 
-
-dead {  
+dead {
   display: block;
   position: absolute;
   background-color: red;
   z-index: 4;
 }
-
