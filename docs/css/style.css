@@ -35,6 +35,19 @@ life {
   z-index: 6;
 }
 
+stonescore {
+  margin: 10px;
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  left: 1500px;
+  font-family: "Press Start 2P", cursive;
+  font-size: 2em;
+  line-height: 1.2em;
+  color: white;
+  z-index: 6;
+}
+
 thanos {
   position: absolute;
   display: block;
@@ -58,6 +71,16 @@ obstacle {
   background-repeat: no-repeat;
   width: 50%;
   height: 25%;
+  z-index: 3;
+}
+
+obstacle {
+  position: absolute;
+  display: block;
+  background-image: url("../img/blue.png");
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
   z-index: 3;
 }
 
@@ -123,11 +146,6 @@ star {
   height: 150px;
   z-index: 3;
   background-image: url(../img/fire.png);
-}
-
-background {
-  background-image: url(../img/background.png);
-  z-index: 3;
 }
 
 dead {

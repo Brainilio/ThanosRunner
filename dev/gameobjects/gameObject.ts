@@ -15,8 +15,7 @@ class GameObject {
   }
 
   public randomNumber(min: number, max: number) {
-    let a: number =
-      Math.floor(Math.random() * (window.innerWidth - min + 3)) + min;
+    let a: number = Math.floor(Math.random() * (max - min + 3)) + min;
     return a;
   }
 }

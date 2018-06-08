@@ -11,12 +11,11 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var infiniteLoop = (function () {
     function infiniteLoop(el, x, y) {
-        this.xSpeed = 15;
+        this.xSpeed = 10;
         this.x = x;
         this.y = y;
         this.div = document.createElement(el);
         document.body.appendChild(this.div);
-        console.log("hoi");
     }
     infiniteLoop.prototype.update = function () {
         this.Loop();
@@ -73,11 +72,34 @@ var GameObject = (function () {
         this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px";
     };
     GameObject.prototype.randomNumber = function (min, max) {
-        var a = Math.floor(Math.random() * (window.innerWidth - min + 3)) + min;
+        var a = Math.floor(Math.random() * (max - min + 3)) + min;
         return a;
     };
     return GameObject;
 }());
+var Stones = (function (_super) {
+    __extends(Stones, _super);
+    function Stones() {
+        var _this = _super.call(this, "blue", Math.random() * window.innerWidth, Math.random() * window.innerHeight) || this;
+        _this.speedX = -3 - Math.random() * 6;
+        _this.color = _this.randomNumber(0, 360);
+        _this.div.style.webkitFilter = "hue-rotate(" + _this.color + "deg)";
+        _this.div.style.filter = "hue-rotate(" + _this.color + "deg)";
+        return _this;
+    }
+    Stones.prototype.update = function () {
+        this.x += this.speedX;
+        if (this.y < 450) {
+            this.dead();
+        }
+        this.div.style.left = this.x + "px";
+        this.div.style.top = this.y + "px";
+    };
+    Stones.prototype.dead = function () {
+        this.div.remove();
+    };
+    return Stones;
+}(GameObject));
 var Obstacle = (function (_super) {
     __extends(Obstacle, _super);
     function Obstacle() {
@@ -275,14 +297,13 @@ var GameOver = (function () {
 }());
 var Playscreen = (function () {
     function Playscreen(g) {
-        this.stones = 0;
         this.score = 125;
         this.life = 10;
+        this.infinitystones = [];
         this.stars = [];
-        this.level = 0.01;
-        this.tree = 0.0025;
-        this.stonechance = 0.00012;
         this.obstacle = [];
+        this.level = 0.000000001;
+        this.tree = 0.0000000000000000000025;
         this.game = g;
         this.lifeElement = document.createElement("life");
         document.body.appendChild(this.lifeElement);
@@ -290,9 +311,9 @@ var Playscreen = (function () {
         this.scoreElement = document.createElement("score");
         document.body.appendChild(this.scoreElement);
         this.scoreElement.innerHTML = "Score: 0 ";
-        this.stoneElement = document.createElement("stones");
+        this.stoneElement = document.createElement("stonescore");
         document.body.appendChild(this.stoneElement);
-        this.stoneElement.innerHTML = "Life: 0 ";
+        this.stoneElement.innerHTML = "Stones collected: 0 ";
         this.thanos = new Thanos();
         this.background = new background();
     }
@@ -320,15 +341,11 @@ var Playscreen = (function () {
         for (var _b = 0, _c = this.obstacle; _b < _c.length; _b++) {
             var e = _c[_b];
             if (this.checkCollision(this.thanos.getRectangle(), e.getRectangle())) {
-                this.life -= 1;
-                this.lifeElement.innerHTML = "Life: " + this.life;
+                this.score -= 20;
+                this.lifeElement.innerHTML = "Score: " + this.life;
                 e.dead();
             }
             e.update();
-            if (this.life == 50) {
-                this.game.emptyScreen();
-                this.game.showStartScreen(new Startscreen(this.game));
-            }
         }
         this.thanos.update();
         this.background.update();

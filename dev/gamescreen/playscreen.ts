@@ -5,15 +5,18 @@ class Playscreen {
   private lifeElement: HTMLElement;
   private stoneElement: HTMLElement;
 
-  public stones: number = 0;
+  //private stonescore: number = 0;
   public score: number = 125;
-  public life: number = 10;
+  private life: number = 10;
+
   private game: Game;
+
+  private infinitystones: Stones[] = [];
   private stars: Star[] = [];
-  private level: number = 0.01;
-  private tree: number = 0.0025;
-  private stonechance: number = 0.00012;
   private obstacle: Obstacle[] = [];
+
+  private level: number = 0.000000001;
+  private tree: number = 0.0000000000000000000025;
 
   constructor(g: Game) {
     this.game = g;
@@ -26,9 +29,9 @@ class Playscreen {
     document.body.appendChild(this.scoreElement);
     this.scoreElement.innerHTML = "Score: 0 ";
 
-    this.stoneElement = document.createElement("stones");
+    this.stoneElement = document.createElement("stonescore");
     document.body.appendChild(this.stoneElement);
-    this.stoneElement.innerHTML = "Life: 0 ";
+    this.stoneElement.innerHTML = "Stones collected: 0 ";
 
     this.thanos = new Thanos();
     this.background = new background();
@@ -55,6 +58,7 @@ class Playscreen {
         b.dead();
       }
       b.update();
+
       if (this.life == 0) {
         this.game.emptyScreen();
         this.game.showGameOver(new GameOver(this.game));
@@ -63,16 +67,11 @@ class Playscreen {
 
     for (let e of this.obstacle) {
       if (this.checkCollision(this.thanos.getRectangle(), e.getRectangle())) {
-        this.life -= 1;
-        this.lifeElement.innerHTML = "Life: " + this.life;
+        this.score -= 20;
+        this.lifeElement.innerHTML = "Score: " + this.life;
         e.dead();
       }
-
       e.update();
-      if (this.life == 50) {
-        this.game.emptyScreen();
-        this.game.showStartScreen(new Startscreen(this.game));
-      }
     }
 
     this.thanos.update();
