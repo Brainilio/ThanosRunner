@@ -74,7 +74,7 @@ obstacle {
   z-index: 3;
 }
 
-obstacle {
+blue {
   position: absolute;
   display: block;
   background-image: url("../img/blue.png");
@@ -88,7 +88,7 @@ space {
   position: absolute;
   width: 100%;
   height: 50%;
-  top: 80px;
+  top: 0px;
   background-image: url(../img/background.png);
   background-repeat: repeat;
   background-size: 100% 100%;

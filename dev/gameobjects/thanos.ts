@@ -33,13 +33,13 @@ class Thanos extends GameObject {
   private onKeyDown(e: KeyboardEvent): void {
     switch (e.keyCode) {
       case this.rightkey:
-        this.leftSpeed = 10;
+        this.leftSpeed = 5;
         break;
       case this.leftkey:
-        this.rightSpeed = 10;
+        this.rightSpeed = 5;
         break;
       case this.upkey:
-        this.upSpeed = 10;
+        this.upSpeed = 5;
     }
   }
 
@@ -66,7 +66,7 @@ class Thanos extends GameObject {
     }
 
     if (this.y < 0) {
-      this.upSpeed = -1;
+      this.upSpeed = -5;
     }
 
     if (this.x > window.innerWidth) {

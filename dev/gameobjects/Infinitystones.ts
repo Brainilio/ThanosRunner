@@ -5,13 +5,10 @@ class Stones extends GameObject {
   public color: number;
 
   constructor() {
-    super(
-      "blue",
-      Math.random() * window.innerWidth,
-      Math.random() * window.innerHeight
-    );
+    super("blue", Math.floor(Math.random() * (window.innerWidth - 0 + 3)), 400);
+    this.speedX = Math.floor(Math.random() * Math.floor(-15));
+    this.startLeft();
 
-    this.speedX = -3 - Math.random() * 6;
     this.color = this.randomNumber(0, 360);
     this.div.style.webkitFilter = "hue-rotate(" + this.color + "deg)";
     this.div.style.filter = "hue-rotate(" + this.color + "deg)";
@@ -20,8 +17,8 @@ class Stones extends GameObject {
   update() {
     this.x += this.speedX;
 
-    if (this.y < 450) {
-      this.dead();
+    if (this.x > window.innerWidth) {
+      this.startLeft();
     }
 
     this.div.style.left = `${this.x}px`;
@@ -30,5 +27,13 @@ class Stones extends GameObject {
 
   public dead() {
     this.div.remove();
+  }
+
+  private startLeft() {
+    this.x = this.x = this.div.getBoundingClientRect().width * 2;
+  }
+
+  public getRectangle() {
+    return this.div.getBoundingClientRect();
   }
 }

@@ -11,7 +11,7 @@ class Playscreen {
 
   private game: Game;
 
-  private infinitystones: Stones[] = [];
+  private infinitystones: Stones;
   private stars: Star[] = [];
   private obstacle: Obstacle[] = [];
 
@@ -35,6 +35,7 @@ class Playscreen {
 
     this.thanos = new Thanos();
     this.background = new background();
+    this.infinitystones = new Stones();
   }
 
   public update() {
@@ -76,6 +77,7 @@ class Playscreen {
 
     this.thanos.update();
     this.background.update();
+    this.infinitystones.update();
   }
 
   public checkCollision(a: ClientRect, b: ClientRect): boolean {
