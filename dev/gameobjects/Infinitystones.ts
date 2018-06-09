@@ -1,11 +1,12 @@
 /// <reference path="../gameobjects/gameObject.ts"/>
 
 class Stones extends GameObject {
-  public speedX: number;
+  public speedX: number = 0;
   public color: number;
 
   constructor() {
     super("blue", Math.floor(Math.random() * (window.innerWidth - 0 + 3)), 400);
+
     this.speedX = Math.floor(Math.random() * Math.floor(-15));
     this.startLeft();
 

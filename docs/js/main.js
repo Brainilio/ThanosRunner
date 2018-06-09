@@ -82,6 +82,7 @@ var Stones = (function (_super) {
     __extends(Stones, _super);
     function Stones() {
         var _this = _super.call(this, "blue", Math.floor(Math.random() * (window.innerWidth - 0 + 3)), 400) || this;
+        _this.speedX = 0;
         _this.speedX = Math.floor(Math.random() * Math.floor(-15));
         _this.startLeft();
         _this.color = _this.randomNumber(0, 360);
@@ -307,6 +308,7 @@ var Playscreen = (function () {
     function Playscreen(g) {
         this.score = 125;
         this.life = 10;
+        this.infinitystones = [];
         this.stars = [];
         this.obstacle = [];
         this.level = 0.000000001;
@@ -323,7 +325,9 @@ var Playscreen = (function () {
         this.stoneElement.innerHTML = "Stones collected: 0 ";
         this.thanos = new Thanos();
         this.background = new background();
-        this.infinitystones = new Stones();
+        for (var i = 0; i < 10; i++) {
+            this.infinitystones.push(new Stones());
+        }
     }
     Playscreen.prototype.update = function () {
         if (Math.random() < this.tree) {
@@ -355,9 +359,12 @@ var Playscreen = (function () {
             }
             e.update();
         }
+        for (var _d = 0, _e = this.infinitystones; _d < _e.length; _d++) {
+            var g = _e[_d];
+            g.update();
+        }
         this.thanos.update();
         this.background.update();
-        this.infinitystones.update();
     };
     Playscreen.prototype.checkCollision = function (a, b) {
         return (a.left <= b.right &&
