@@ -139,25 +139,17 @@ blue {
 }
 
 space {
-  position: absolute;
   width: 100%;
   height: 100%;
-  top: 0px;
   background-image: url(../img/background.png);
   background-repeat: repeat;
-  box-sizing: border-box;
-  z-index: 1;
 }
 
 ground {
-  position: absolute;
   width: 100%;
   height: 100%;
   background-image: url("../img/ground.png");
   background-repeat: repeat-x;
-  top: 50px;
-  z-index: 2;
-  box-sizing: border-box;
 }
 
 start {

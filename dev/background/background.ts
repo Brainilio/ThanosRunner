@@ -1,24 +1,14 @@
+class background {
+  protected ground: Ground;
+  protected space: Space;
 
-class background {   
+  constructor() {
+    this.ground = new Ground();
+    this.space = new Space();
+  }
 
-    protected ground:Ground
-    protected space:Space
-    
-
-    constructor() {  
-       
-       this.ground = new Ground()
-       this.space = new Space() 
-      
-    }
-
-
-     public update() {  
-        this.ground.update() 
-        this.space.update()
-
-        
-    }
-
-    
+  public update() {
+    this.ground.update();
+    this.space.update();
+  }
 }
