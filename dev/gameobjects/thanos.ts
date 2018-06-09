@@ -64,9 +64,15 @@ class Thanos extends GameObject {
       this.upSpeed = -5;
     }
 
-    if (this.x > window.innerWidth) {
-      this.rightSpeed = 0;
+    if (this.x > 1850) {
+      this.rightSpeed = -1;
     }
+
+    if (this.x < 0) {
+      this.x = 0;
+    }
+
+    console.log(this.x);
 
     this.Spritemove(-555);
 
