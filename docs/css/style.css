@@ -140,8 +140,8 @@ blue {
 
 space {
   position: absolute;
-  width: 1900px;
-  height: 900px;
+  width: 100%;
+  height: 100%;
   top: 0px;
   background-image: url(../img/background.png);
   background-repeat: repeat;
@@ -151,8 +151,8 @@ space {
 
 ground {
   position: absolute;
-  width: 1900px;
-  height: 750px;
+  width: 100%;
+  height: 100%;
   background-image: url("../img/ground.png");
   background-repeat: repeat-x;
   top: 50px;
