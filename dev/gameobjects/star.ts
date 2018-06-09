@@ -5,11 +5,7 @@ class Star extends GameObject {
   public speedY: number;
 
   constructor() {
-    super(
-      "star",
-      Math.random() * window.innerWidth,
-      Math.random() * window.innerHeight
-    );
+    super("star", Math.random() * window.innerWidth, 0);
 
     this.speedX = -3 - Math.random() * 6;
     this.speedY = Math.random() * 8;
@@ -43,8 +39,6 @@ class Star extends GameObject {
   }
 
   private startLeft() {
-    // plaats hem op min de breedte van de car zodat hij het scherm weer inrijdt
-    // op random y positie
     this.x = this.x = this.div.getBoundingClientRect().width * -1;
     this.y =
       100 +

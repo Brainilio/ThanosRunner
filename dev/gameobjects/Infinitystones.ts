@@ -5,9 +5,13 @@ class Stones extends GameObject {
   public color: number;
 
   constructor() {
-    super("blue", Math.floor(Math.random() * (window.innerWidth - 0 + 3)), 400);
+    super(
+      "blue",
+      Math.floor(Math.random() * (window.innerWidth + 3)),
+      Math.floor(Math.random() * 450) + 1
+    );
 
-    this.speedX = Math.floor(Math.random() * Math.floor(-15));
+    this.speedX = -10;
     this.startLeft();
 
     this.color = this.randomNumber(0, 360);
@@ -31,7 +35,7 @@ class Stones extends GameObject {
   }
 
   private startLeft() {
-    this.x = this.x = this.div.getBoundingClientRect().width * 2;
+    this.x = this.x = 1920;
   }
 
   public getRectangle() {

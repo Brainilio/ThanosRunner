@@ -1,9 +1,12 @@
-class GameObject {
+/// <reference path="../gameobjects/animation.ts"/>
+
+class GameObject extends SpriteAnimation {
   protected x: number;
   protected y: number;
   protected div: HTMLElement;
 
   constructor(el: any, x: number, y: number) {
+    super();
     this.x = x;
     this.y = y;
     this.div = document.createElement(el);
@@ -17,5 +20,18 @@ class GameObject {
   public randomNumber(min: number, max: number) {
     let a: number = Math.floor(Math.random() * (max - min + 3)) + min;
     return a;
+  }
+
+  public Spritemove(b: number) {
+    this.speedcounter++;
+
+    let framerate = 8;
+    if (this.speedcounter % framerate == 0) {
+      this.frame++;
+    }
+    if (this.frame >= this.frames) this.frame = 1;
+
+    let pos = 0 - this.frame * this.frameWidth;
+    this.div.style.backgroundPosition = pos + `px ${b}px`;
   }
 }

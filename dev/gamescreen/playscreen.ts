@@ -1,13 +1,12 @@
 class Playscreen {
   private thanos: Thanos;
   private background: background;
-  private scoreElement: HTMLElement;
+
   private lifeElement: HTMLElement;
   private stoneElement: HTMLElement;
 
-  //private stonescore: number = 0;
-  public score: number = 125;
-  private life: number = 10;
+  private life: number = 20;
+  private stone: number = 0;
 
   private game: Game;
 
@@ -15,32 +14,30 @@ class Playscreen {
   private stars: Star[] = [];
   private obstacle: Obstacle[] = [];
 
-  private level: number = 0.000000001;
-  private tree: number = 0.0000000000000000000025;
+  private level: number = 0.0025;
+  private tree: number = 0.0025;
+  private infinitychance: number = 0.001;
 
   constructor(g: Game) {
     this.game = g;
 
     this.lifeElement = document.createElement("life");
     document.body.appendChild(this.lifeElement);
-    this.lifeElement.innerHTML = "Life: 10 ";
-
-    this.scoreElement = document.createElement("score");
-    document.body.appendChild(this.scoreElement);
-    this.scoreElement.innerHTML = "Score: 0 ";
+    this.lifeElement.innerHTML = "Lives:  " + this.life;
 
     this.stoneElement = document.createElement("stonescore");
     document.body.appendChild(this.stoneElement);
-    this.stoneElement.innerHTML = "Stones collected: 0 ";
+    this.stoneElement.innerHTML = "Stones collected: 0 out of 6";
 
     this.thanos = new Thanos();
     this.background = new background();
-    for (let i = 0; i < 10; i++) {
-      this.infinitystones.push(new Stones());
-    }
   }
 
   public update() {
+    if (Math.random() < this.infinitychance) {
+      this.infinitystones.push(new Stones());
+    }
+
     if (Math.random() < this.tree) {
       this.obstacle.push(new Obstacle());
     }
@@ -57,27 +54,33 @@ class Playscreen {
 
       if (hit) {
         this.life -= 1;
-        this.lifeElement.innerHTML = "Life  " + this.life;
+        this.lifeElement.innerHTML = "Lives:  " + this.life;
         b.dead();
       }
       b.update();
+    }
 
-      if (this.life == 0) {
-        this.game.emptyScreen();
-        this.game.showGameOver(new GameOver(this.game));
-      }
+    if (this.life == 0) {
+      this.game.emptyScreen();
+      this.game.showGameOver(new GameOver(this.game));
     }
 
     for (let e of this.obstacle) {
       if (this.checkCollision(this.thanos.getRectangle(), e.getRectangle())) {
-        this.score -= 20;
-        this.lifeElement.innerHTML = "Score: " + this.life;
+        this.life -= 1;
+        this.lifeElement.innerHTML = "Lives: " + this.life;
         e.dead();
       }
       e.update();
     }
 
     for (let g of this.infinitystones) {
+      if (this.checkCollision(this.thanos.getRectangle(), g.getRectangle())) {
+        this.stone += 1;
+        this.stoneElement.innerHTML =
+          "Stones collected: " + this.stone + " out of 6.";
+        g.dead();
+      }
       g.update();
     }
 

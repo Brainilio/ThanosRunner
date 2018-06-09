@@ -1,20 +1,16 @@
 body,
 html {
   background-color: black;
-  height: 100%;
-  width: 100%;
+  height: 45%;
+  width: 20%;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-score {
+life {
   margin: 10px;
-  width: 100%;
+  width: 45%;
   height: 100px;
   position: absolute;
-  left: 0px;
+  left: 200px;
   font-family: "Press Start 2P", cursive;
   font-size: 2em;
   line-height: 1.2em;
@@ -22,9 +18,9 @@ score {
   z-index: 6;
 }
 
-life {
+stonescore {
   margin: 10px;
-  width: 100%;
+  width: 500px;
   height: 100px;
   position: absolute;
   left: 800px;
@@ -35,25 +31,29 @@ life {
   z-index: 6;
 }
 
-stonescore {
+.textbegin {
   margin: 10px;
-  width: 100%;
+  width: 25%;
   height: 100px;
   position: absolute;
-  left: 1500px;
   font-family: "Press Start 2P", cursive;
   font-size: 2em;
   line-height: 1.2em;
   color: white;
   z-index: 6;
+  left: 60%;
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
 }
 
 thanos {
   position: absolute;
   display: block;
-  background-image: url(http://img09.deviantart.net/80ee/i/2017/040/7/c/link_sprite_sheet_by_tiozacdasgalaxias-dayh0s6.png);
+  background-image: url("http://img09.deviantart.net/80ee/i/2017/040/7/c/link_sprite_sheet_by_tiozacdasgalaxias-dayh0s6.png");
   background-repeat: no-repeat;
-  width: 90px;
+  width: 100px;
   height: 110px;
   -moz-transform: scaleX(-1);
   -o-transform: scaleX(-1);
@@ -67,11 +67,17 @@ thanos {
 obstacle {
   position: absolute;
   display: block;
-  background-image: url("../img/rock.png");
+  background-image: url(../img/hulk.png);
   background-repeat: no-repeat;
-  width: 50%;
-  height: 25%;
-  z-index: 3;
+  width: 90px;
+  height: 150px;
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+  z-index: 5;
 }
 
 blue {
@@ -79,15 +85,66 @@ blue {
   display: block;
   background-image: url("../img/blue.png");
   background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
+  border: 5px solid red;
+  width: 100px;
+  height: 100px;
   z-index: 3;
+  box-sizing: border-box;
+  -webkit-animation-name: spin;
+  -webkit-animation-duration: 4000ms;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: spin;
+  -moz-animation-duration: 4000ms;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  -ms-animation-name: spin;
+  -ms-animation-duration: 4000ms;
+  -ms-animation-iteration-count: infinite;
+  -ms-animation-timing-function: linear;
+
+  animation-name: spin;
+  animation-duration: 4000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@-ms-keyframes spin {
+  from {
+    -ms-transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 space {
   position: absolute;
-  width: 100%;
-  height: 50%;
+  width: 1900px;
+  height: 900px;
   top: 0px;
   background-image: url(../img/background.png);
   background-repeat: repeat;
@@ -97,7 +154,7 @@ space {
 
 ground {
   position: absolute;
-  width: 100%;
+  width: 1900px;
   height: 80%;
   background-image: url("../img/ground.png");
   background-repeat: repeat-x;
@@ -106,7 +163,7 @@ ground {
 }
 
 start {
-  margin: auto;
+  margin: 1%;
   text-align: center;
   border: 3px solid purple;
   font-family: "Press Start 2P", cursive;
@@ -137,6 +194,8 @@ audio {
   width: 25%;
   left: 36%;
   top: 90%;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
 star {
@@ -153,4 +212,15 @@ dead {
   position: absolute;
   background-color: red;
   z-index: 4;
+}
+
+img {
+  z-index: 4;
+  position: absolute;
+  top: 15%;
+  left: 40%;
+  width: 400px;
+  height: 450px;
+  box-sizing: border-box;
+  padding: 10px;
 }

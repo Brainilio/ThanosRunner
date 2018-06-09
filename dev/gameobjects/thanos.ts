@@ -2,11 +2,6 @@
 class Thanos extends GameObject {
   protected speed: number = 0;
 
-  frames = 10;
-  frame = 0;
-  frameWidth = 102;
-  speedcounter = 0;
-
   private leftkey: number;
   private rightkey: number;
   private upkey: number;
@@ -73,22 +68,7 @@ class Thanos extends GameObject {
       this.rightSpeed = 0;
     }
 
-    this.speedcounter++;
-
-    let framerate = 8;
-    if (this.speedcounter % framerate == 0) {
-      this.frame++;
-    }
-    if (this.frame >= this.frames) this.frame = 1;
-
-    console.log(this.frame);
-
-    let pos = 0 - this.frame * this.frameWidth;
-    this.div.style.backgroundPosition = pos + "px -555px";
-
-    if (onkeyup) {
-      this.frame = 0;
-    }
+    this.Spritemove(-555);
 
     this.div.style.left = `${this.x}px`;
     this.div.style.top = `${this.y}px`;
