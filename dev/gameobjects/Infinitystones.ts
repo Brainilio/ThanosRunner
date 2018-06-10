@@ -1,8 +1,8 @@
 /// <reference path="gameObject.ts"/>
 
 class Stones extends GameObject {
-  public speedX: number = 0;
-  public color: number;
+  private speedX: number = 0;
+  private color: number;
 
   constructor() {
     super(

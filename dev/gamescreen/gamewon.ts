@@ -1,14 +1,18 @@
 class GameWon {
-  private element: HTMLElement;
   private game: Game;
 
   constructor(g: Game) {
     this.game = g;
 
-    this.element = document.createElement("START");
-    document.body.appendChild(this.element);
-    this.element.addEventListener("click", () => this.clicked());
-    this.element.innerHTML = "You WON! Want to go at it again?";
+    let x = document.createElement("img");
+    x.setAttribute("class", "thanoswin");
+    x.setAttribute("src", "img/Thanos-wins.gif");
+    document.body.appendChild(x);
+
+    let h = document.createElement("START");
+    h.addEventListener("click", () => this.clicked());
+    h.innerHTML = "You WON! Want to go at it again?";
+    document.body.appendChild(h);
   }
 
   public update() {}

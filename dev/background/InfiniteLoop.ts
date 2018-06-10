@@ -2,7 +2,7 @@ class infiniteLoop {
   protected x: number;
   protected y: number;
   protected div: HTMLElement;
-  public xSpeed: number;
+  protected xSpeed: number;
 
   constructor(el: any, x: number, y: number) {
     this.xSpeed = 4;

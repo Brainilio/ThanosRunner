@@ -1,6 +1,6 @@
 class background {
-  protected ground: Ground;
-  protected space: Space;
+  private ground: Ground;
+  private space: Space;
 
   constructor() {
     this.ground = new Ground();

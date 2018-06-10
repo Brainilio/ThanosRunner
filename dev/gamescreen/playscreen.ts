@@ -15,12 +15,14 @@ class Playscreen {
   private obstacle: Obstacle[] = [];
   private SpaceShip: Spaceship[] = [];
   private Planets: Planet[] = [];
+  private breaker: Stormbreaker[] = [];
 
-  private level: number = 0.0025;
-  private tree: number = 0.0025;
-  private infinitychance: number = 0.001;
+  private starchance: number = 0.0025;
+  private obstaclechance: number = 0.0025;
+  private infinitychance: number = 0.0001;
   private spaceShipchance: number = 0.0002;
   private planetChance: number = 0.0003;
+  private breakerChance: number = 0;
 
   constructor(g: Game) {
     this.game = g;
@@ -42,12 +44,16 @@ class Playscreen {
       this.infinitystones.push(new Stones());
     }
 
-    if (Math.random() < this.tree) {
+    if (Math.random() < this.obstaclechance) {
       this.obstacle.push(new Obstacle());
     }
 
-    if (Math.random() < this.level) {
+    if (Math.random() < this.starchance) {
       this.stars.push(new Star());
+    }
+
+    if (Math.random() < this.breakerChance) {
+      this.breaker.push(new Stormbreaker());
     }
 
     if (Math.random() < this.spaceShipchance) {
@@ -67,7 +73,7 @@ class Playscreen {
       );
 
       if (hit) {
-        this.life -= 1;
+        this.life -= 2;
         this.lifeElement.innerHTML = "Lives:  " + this.life;
         b.dead();
       }
@@ -83,6 +89,15 @@ class Playscreen {
       e.update();
     }
 
+    for (let k of this.breaker) {
+      if (this.checkCollision(this.thanos.getRectangle(), k.getRectangle())) {
+        this.life -= 5;
+        this.lifeElement.innerHTML = "Lives: " + this.life;
+        k.dead();
+      }
+      k.update();
+    }
+
     if (this.life == 0) {
       this.game.emptyScreen();
       this.game.showGameOver(new GameOver(this.game));
@@ -93,6 +108,10 @@ class Playscreen {
     for (let g of this.infinitystones) {
       if (this.checkCollision(this.thanos.getRectangle(), g.getRectangle())) {
         this.stone += 1;
+        this.infinitychance += 0.005;
+        this.obstaclechance += 0.005;
+        this.breakerChance += 0.001;
+
         this.stoneElement.innerHTML =
           "Stones collected: " + this.stone + " out of 6.";
         g.dead();

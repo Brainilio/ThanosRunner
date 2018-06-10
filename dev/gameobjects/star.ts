@@ -1,8 +1,8 @@
 /// <reference path="gameObject.ts"/>
 
 class Star extends GameObject {
-  public speedX: number;
-  public speedY: number;
+  private speedX: number;
+  private speedY: number;
 
   constructor() {
     super("star", Math.random() * window.innerWidth, 0);

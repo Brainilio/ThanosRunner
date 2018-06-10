@@ -355,13 +355,16 @@ var GameOver = (function () {
     function GameOver(g) {
         var _this = this;
         this.game = g;
+        var x = document.createElement("img");
+        x.setAttribute("class", "thanosloses");
+        x.setAttribute("src", "img/thanos-walkf.gif");
+        document.body.appendChild(x);
         this.element = document.createElement("START");
         document.body.appendChild(this.element);
         this.element.addEventListener("click", function () { return _this.clicked(); });
         this.element.innerHTML = "GAME OVER, TRY AGAIN";
     }
-    GameOver.prototype.update = function () {
-    };
+    GameOver.prototype.update = function () { };
     GameOver.prototype.clicked = function () {
         this.game.emptyScreen();
         this.game.showStartScreen(new Startscreen(this.game));
@@ -372,10 +375,14 @@ var GameWon = (function () {
     function GameWon(g) {
         var _this = this;
         this.game = g;
-        this.element = document.createElement("START");
-        document.body.appendChild(this.element);
-        this.element.addEventListener("click", function () { return _this.clicked(); });
-        this.element.innerHTML = "You WON! Want to go at it again?";
+        var x = document.createElement("img");
+        x.setAttribute("class", "thanoswin");
+        x.setAttribute("src", "img/Thanos-wins.gif");
+        document.body.appendChild(x);
+        var h = document.createElement("START");
+        h.addEventListener("click", function () { return _this.clicked(); });
+        h.innerHTML = "You WON! Want to go at it again?";
+        document.body.appendChild(h);
     }
     GameWon.prototype.update = function () { };
     GameWon.prototype.clicked = function () {
@@ -393,11 +400,13 @@ var Playscreen = (function () {
         this.obstacle = [];
         this.SpaceShip = [];
         this.Planets = [];
-        this.level = 0.0025;
-        this.tree = 0.0025;
-        this.infinitychance = 0.001;
+        this.breaker = [];
+        this.starchance = 0.0025;
+        this.obstaclechance = 0.0025;
+        this.infinitychance = 0.0001;
         this.spaceShipchance = 0.0002;
         this.planetChance = 0.0003;
+        this.breakerChance = 0;
         this.game = g;
         this.lifeElement = document.createElement("life");
         document.body.appendChild(this.lifeElement);
@@ -412,11 +421,14 @@ var Playscreen = (function () {
         if (Math.random() < this.infinitychance) {
             this.infinitystones.push(new Stones());
         }
-        if (Math.random() < this.tree) {
+        if (Math.random() < this.obstaclechance) {
             this.obstacle.push(new Obstacle());
         }
-        if (Math.random() < this.level) {
+        if (Math.random() < this.starchance) {
             this.stars.push(new Star());
+        }
+        if (Math.random() < this.breakerChance) {
+            this.breaker.push(new Stormbreaker());
         }
         if (Math.random() < this.spaceShipchance) {
             this.SpaceShip.push(new Spaceship());
@@ -428,7 +440,7 @@ var Playscreen = (function () {
             var b = _a[_i];
             var hit = this.checkCollision(this.thanos.getRectangle(), b.getRectangle());
             if (hit) {
-                this.life -= 1;
+                this.life -= 2;
                 this.lifeElement.innerHTML = "Lives:  " + this.life;
                 b.dead();
             }
@@ -443,14 +455,26 @@ var Playscreen = (function () {
             }
             e.update();
         }
+        for (var _d = 0, _e = this.breaker; _d < _e.length; _d++) {
+            var k = _e[_d];
+            if (this.checkCollision(this.thanos.getRectangle(), k.getRectangle())) {
+                this.life -= 5;
+                this.lifeElement.innerHTML = "Lives: " + this.life;
+                k.dead();
+            }
+            k.update();
+        }
         if (this.life == 0) {
             this.game.emptyScreen();
             this.game.showGameOver(new GameOver(this.game));
         }
-        for (var _d = 0, _e = this.infinitystones; _d < _e.length; _d++) {
-            var g = _e[_d];
+        for (var _f = 0, _g = this.infinitystones; _f < _g.length; _f++) {
+            var g = _g[_f];
             if (this.checkCollision(this.thanos.getRectangle(), g.getRectangle())) {
                 this.stone += 1;
+                this.infinitychance += 0.005;
+                this.obstaclechance += 0.005;
+                this.breakerChance += 0.001;
                 this.stoneElement.innerHTML =
                     "Stones collected: " + this.stone + " out of 6.";
                 g.dead();
@@ -461,12 +485,12 @@ var Playscreen = (function () {
             this.game.emptyScreen();
             this.game.showGameWon(new GameWon(this.game));
         }
-        for (var _f = 0, _g = this.SpaceShip; _f < _g.length; _f++) {
-            var h = _g[_f];
+        for (var _h = 0, _j = this.SpaceShip; _h < _j.length; _h++) {
+            var h = _j[_h];
             h.update();
         }
-        for (var _h = 0, _j = this.Planets; _h < _j.length; _h++) {
-            var i = _j[_h];
+        for (var _k = 0, _l = this.Planets; _k < _l.length; _k++) {
+            var i = _l[_k];
             i.update();
         }
         this.thanos.update();

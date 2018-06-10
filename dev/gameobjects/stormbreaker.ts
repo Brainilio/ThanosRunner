@@ -1,7 +1,7 @@
 /// <reference path="gameObject.ts"/>
 
 class Stormbreaker extends GameObject {
-  public speedX: number = 0;
+  private speedX: number = 0;
 
   constructor() {
     super(

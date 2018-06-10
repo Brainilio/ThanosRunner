@@ -1,8 +1,8 @@
 class SpriteAnimation {
-  frames = 10;
-  frame = 0;
-  frameWidth = 102;
-  speedcounter = 0;
+  protected frames = 10;
+  protected frame = 0;
+  protected frameWidth = 102;
+  protected speedcounter = 0;
 
   constructor() {}
 

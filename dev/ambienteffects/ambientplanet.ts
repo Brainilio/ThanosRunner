@@ -2,7 +2,7 @@
 
 class Planet extends GameObject {
   private xspeed: number = 0;
-  public color: number;
+  private color: number;
 
   constructor() {
     super("planet", 50, Math.floor(Math.random() * 450) + 1);
