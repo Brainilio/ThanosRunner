@@ -12,7 +12,8 @@ class Game {
   }
 
   emptyScreen() {
-    document.body.innerHTML = "";
+    let y = document.getElementsByTagName("foreground")[0];
+    y.innerHTML = "";
   }
 
   showPlayScreen(screen: Playscreen) {

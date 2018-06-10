@@ -25,8 +25,9 @@ var GameObject = (function (_super) {
         var _this = _super.call(this) || this;
         _this.x = x;
         _this.y = y;
+        var a = document.getElementsByTagName("foreground")[0];
         _this.div = document.createElement(el);
-        document.body.appendChild(_this.div);
+        a.appendChild(_this.div);
         return _this;
     }
     GameObject.prototype.update = function () {
@@ -107,8 +108,9 @@ var infiniteLoop = (function () {
         this.xSpeed = 4;
         this.x = x;
         this.y = y;
+        var u = document.getElementsByTagName("foreground")[0];
         this.div = document.createElement(el);
-        document.body.appendChild(this.div);
+        u.appendChild(this.div);
     }
     infiniteLoop.prototype.update = function () {
         this.Loop();
@@ -328,7 +330,8 @@ var Game = (function () {
         requestAnimationFrame(function () { return _this.gameLoop(); });
     };
     Game.prototype.emptyScreen = function () {
-        document.body.innerHTML = "";
+        var y = document.getElementsByTagName("foreground")[0];
+        y.innerHTML = "";
     };
     Game.prototype.showPlayScreen = function (screen) {
         this.screen = screen;
@@ -352,14 +355,15 @@ var GameOver = (function () {
     function GameOver(g) {
         var _this = this;
         this.game = g;
+        var y = document.getElementsByTagName("foreground")[0];
         var x = document.createElement("img");
         x.setAttribute("class", "thanosloses");
         x.setAttribute("src", "img/thanos-walkf.gif");
-        document.body.appendChild(x);
-        this.element = document.createElement("START");
-        document.body.appendChild(this.element);
-        this.element.addEventListener("click", function () { return _this.clicked(); });
-        this.element.innerHTML = "GAME OVER, TRY AGAIN";
+        y.appendChild(x);
+        var a = document.createElement("START");
+        document.body.appendChild(a);
+        a.addEventListener("click", function () { return _this.clicked(); });
+        a.innerHTML = "GAME OVER, TRY AGAIN";
     }
     GameOver.prototype.update = function () { };
     GameOver.prototype.clicked = function () {
@@ -372,14 +376,15 @@ var GameWon = (function () {
     function GameWon(g) {
         var _this = this;
         this.game = g;
+        var y = document.getElementsByTagName("foreground")[0];
         var x = document.createElement("img");
         x.setAttribute("class", "thanoswin");
         x.setAttribute("src", "img/Thanos-wins.gif");
-        document.body.appendChild(x);
+        y.appendChild(x);
         var h = document.createElement("START");
         h.addEventListener("click", function () { return _this.clicked(); });
         h.innerHTML = "You WON! Want to go at it again?";
-        document.body.appendChild(h);
+        y.appendChild(h);
     }
     GameWon.prototype.update = function () { };
     GameWon.prototype.clicked = function () {
@@ -390,7 +395,6 @@ var GameWon = (function () {
 }());
 var Playscreen = (function () {
     function Playscreen(g) {
-        var _this = this;
         this.life = 20;
         this.stone = 0;
         this.infinitystones = [];
@@ -406,15 +410,13 @@ var Playscreen = (function () {
         this.planetChance = 0.0003;
         this.breakerChance = 0;
         this.game = g;
+        var y = document.getElementsByTagName("foreground")[0];
         this.lifeElement = document.createElement("life");
-        document.body.appendChild(this.lifeElement);
+        y.appendChild(this.lifeElement);
         this.lifeElement.innerHTML = "Lives:  " + this.life;
         this.stoneElement = document.createElement("stonescore");
-        document.body.appendChild(this.stoneElement);
+        y.appendChild(this.stoneElement);
         this.stoneElement.innerHTML = "Stones collected: 0 out of 6";
-        var d = document.createElement("return");
-        document.body.appendChild(d);
-        d.addEventListener("click", function () { return _this.return(); });
         this.thanos = new Thanos();
         this.background = new background();
     }
@@ -473,7 +475,6 @@ var Playscreen = (function () {
             var g = _g[_f];
             if (this.checkCollision(this.thanos.getRectangle(), g.getRectangle())) {
                 this.stone += 1;
-                this.infinitychance += 0.005;
                 this.obstaclechance += 0.005;
                 this.breakerChance += 0.001;
                 this.stoneElement.innerHTML =
@@ -514,20 +515,22 @@ var Startscreen = (function () {
     function Startscreen(g) {
         var _this = this;
         this.game = g;
+        var h = document.getElementsByTagName("foreground")[0];
+        var j = document.getElementsByTagName("background")[0];
         var x = document.createElement("IMG");
         x.setAttribute("src", "img/thanos1.png");
-        document.body.appendChild(x);
+        h.appendChild(x);
         var y = document.createElement("P");
         y.setAttribute("class", "textbegin");
         y.innerHTML =
             "Sup. 43/m/Titan. Not tryna catch feelings, just stones. Let's chill.";
-        document.body.appendChild(y);
+        h.appendChild(y);
         var a = document.createElement("START");
-        document.body.appendChild(a);
+        h.appendChild(a);
         a.addEventListener("click", function () { return _this.clicked(); });
         a.innerHTML = "HELP THANOS GET THE INFINITY STONES";
         var b = document.createElement("startsong");
-        document.body.appendChild(b);
+        j.appendChild(b);
     }
     Startscreen.prototype.update = function () { };
     Startscreen.prototype.clicked = function () {

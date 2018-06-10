@@ -27,17 +27,16 @@ class Playscreen {
   constructor(g: Game) {
     this.game = g;
 
+    let y = document.getElementsByTagName("foreground")[0];
+
     this.lifeElement = document.createElement("life");
-    document.body.appendChild(this.lifeElement);
+    y.appendChild(this.lifeElement);
     this.lifeElement.innerHTML = "Lives:  " + this.life;
 
     this.stoneElement = document.createElement("stonescore");
-    document.body.appendChild(this.stoneElement);
+    y.appendChild(this.stoneElement);
     this.stoneElement.innerHTML = "Stones collected: 0 out of 6";
 
-    let d = document.createElement("return");
-    document.body.appendChild(d);
-    d.addEventListener("click", () => this.return());
     this.thanos = new Thanos();
     this.background = new background();
   }
@@ -111,7 +110,6 @@ class Playscreen {
     for (let g of this.infinitystones) {
       if (this.checkCollision(this.thanos.getRectangle(), g.getRectangle())) {
         this.stone += 1;
-        this.infinitychance += 0.005;
         this.obstaclechance += 0.005;
         this.breakerChance += 0.001;
 

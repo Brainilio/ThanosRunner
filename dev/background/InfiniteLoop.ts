@@ -8,8 +8,9 @@ class infiniteLoop {
     this.xSpeed = 4;
     this.x = x;
     this.y = y;
+    let u = document.getElementsByTagName("foreground")[0];
     this.div = document.createElement(el);
-    document.body.appendChild(this.div);
+    u.appendChild(this.div);
   }
 
   public update() {

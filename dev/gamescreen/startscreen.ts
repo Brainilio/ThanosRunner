@@ -4,23 +4,27 @@ class Startscreen {
   constructor(g: Game) {
     this.game = g;
 
+    let h = document.getElementsByTagName("foreground")[0];
+
+    let j = document.getElementsByTagName("background")[0];
+
     var x = document.createElement("IMG");
     x.setAttribute("src", "img/thanos1.png");
-    document.body.appendChild(x);
+    h.appendChild(x);
 
     var y = document.createElement("P");
     y.setAttribute("class", "textbegin");
     y.innerHTML =
       "Sup. 43/m/Titan. Not tryna catch feelings, just stones. Let's chill.";
-    document.body.appendChild(y);
+    h.appendChild(y);
 
     var a = document.createElement("START");
-    document.body.appendChild(a);
+    h.appendChild(a);
     a.addEventListener("click", () => this.clicked());
     a.innerHTML = "HELP THANOS GET THE INFINITY STONES";
 
     var b = document.createElement("startsong");
-    document.body.appendChild(b);
+    j.appendChild(b);
   }
 
   public update() {}

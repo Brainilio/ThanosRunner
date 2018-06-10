@@ -4,15 +4,17 @@ class GameWon {
   constructor(g: Game) {
     this.game = g;
 
+    let y = document.getElementsByTagName("foreground")[0];
+
     let x = document.createElement("img");
     x.setAttribute("class", "thanoswin");
     x.setAttribute("src", "img/Thanos-wins.gif");
-    document.body.appendChild(x);
+    y.appendChild(x);
 
     let h = document.createElement("START");
     h.addEventListener("click", () => this.clicked());
     h.innerHTML = "You WON! Want to go at it again?";
-    document.body.appendChild(h);
+    y.appendChild(h);
   }
 
   public update() {}

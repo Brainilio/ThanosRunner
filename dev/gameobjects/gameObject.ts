@@ -9,8 +9,9 @@ class GameObject extends SpriteAnimation {
     super();
     this.x = x;
     this.y = y;
+    let a = document.getElementsByTagName("foreground")[0];
     this.div = document.createElement(el);
-    document.body.appendChild(this.div);
+    a.appendChild(this.div);
   }
 
   public update() {

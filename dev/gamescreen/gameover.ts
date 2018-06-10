@@ -1,19 +1,20 @@
 class GameOver {
-  private element: HTMLElement;
   private game: Game;
 
   constructor(g: Game) {
     this.game = g;
 
+    let y = document.getElementsByTagName("foreground")[0];
+
     let x = document.createElement("img");
     x.setAttribute("class", "thanosloses");
     x.setAttribute("src", "img/thanos-walkf.gif");
-    document.body.appendChild(x);
+    y.appendChild(x);
 
-    this.element = document.createElement("START");
-    document.body.appendChild(this.element);
-    this.element.addEventListener("click", () => this.clicked());
-    this.element.innerHTML = "GAME OVER, TRY AGAIN";
+    let a = document.createElement("START");
+    document.body.appendChild(a);
+    a.addEventListener("click", () => this.clicked());
+    a.innerHTML = "GAME OVER, TRY AGAIN";
   }
 
   public update() {}
