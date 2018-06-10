@@ -24,12 +24,4 @@ class Obstacle extends GameObject {
   private startRight() {
     this.x = this.x = this.div.getBoundingClientRect().width * -2;
   }
-
-  public getRectangle() {
-    return this.div.getBoundingClientRect();
-  }
-
-  public dead() {
-    this.div.remove();
-  }
 }

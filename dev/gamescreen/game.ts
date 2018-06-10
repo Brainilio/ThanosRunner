@@ -1,38 +1,37 @@
-class Game {  
+class Game {
+  screen: any;
 
-    screen:any
+  constructor() {
+    this.screen = new Startscreen(this);
+    this.gameLoop();
+  }
 
+  gameLoop() {
+    this.screen.update();
+    requestAnimationFrame(() => this.gameLoop());
+  }
 
-    constructor() {  
-        this.screen = new Startscreen(this)
-        this.gameLoop()
-    }
+  emptyScreen() {
+    document.body.innerHTML = "";
+  }
 
-    gameLoop() { 
-        this.screen.update() 
-        requestAnimationFrame(()=>this.gameLoop())
+  showPlayScreen(screen: Playscreen) {
+    this.screen = screen;
+    this.screen.update();
+  }
 
-    }
+  showGameOver(screen: GameOver) {
+    this.screen = screen;
+    this.screen.update();
+  }
 
-    emptyScreen() {  
-        
-        document.body.innerHTML = ""
-    }
+  showStartScreen(screen: Startscreen) {
+    this.screen = screen;
+    this.screen.update();
+  }
 
-    showPlayScreen(screen: Playscreen) { 
-        this.screen = screen
-        this.screen.update(); 
-
-    }
-
-    showGameOver(screen:GameOver) {  
-        this.screen = screen
-        this.screen.update(); 
-    }
-
-    showStartScreen(screen: Startscreen) {  
-        this.screen = screen 
-        this.screen.update(); 
-    }
-
+  showGameWon(screen: GameWon) {
+    this.screen = screen;
+    this.screen.update();
+  }
 }

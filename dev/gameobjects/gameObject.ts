@@ -34,4 +34,12 @@ class GameObject extends SpriteAnimation {
     let pos = 0 - this.frame * this.frameWidth;
     this.div.style.backgroundPosition = pos + `px ${b}px`;
   }
+
+  public getRectangle() {
+    return this.div.getBoundingClientRect();
+  }
+
+  public dead() {
+    this.div.remove();
+  }
 }

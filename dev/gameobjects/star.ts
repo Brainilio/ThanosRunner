@@ -11,10 +11,6 @@ class Star extends GameObject {
     this.speedY = Math.random() * 8;
   }
 
-  public getRectangle() {
-    return this.div.getBoundingClientRect();
-  }
-
   public update() {
     this.x += this.speedX;
     this.y += this.speedY;
@@ -33,9 +29,6 @@ class Star extends GameObject {
 
     this.div.style.left = `${this.x}px`;
     this.div.style.top = `${this.y}px`;
-  }
-  public dead() {
-    this.div.remove();
   }
 
   private startLeft() {

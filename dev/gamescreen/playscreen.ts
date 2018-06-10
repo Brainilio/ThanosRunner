@@ -13,10 +13,14 @@ class Playscreen {
   private infinitystones: Stones[] = [];
   private stars: Star[] = [];
   private obstacle: Obstacle[] = [];
+  private SpaceShip: Spaceship[] = [];
+  private Planets: Planet[] = [];
 
   private level: number = 0.0025;
   private tree: number = 0.0025;
   private infinitychance: number = 0.001;
+  private spaceShipchance: number = 0.0002;
+  private planetChance: number = 0.0003;
 
   constructor(g: Game) {
     this.game = g;
@@ -46,6 +50,16 @@ class Playscreen {
       this.stars.push(new Star());
     }
 
+    if (Math.random() < this.spaceShipchance) {
+      this.SpaceShip.push(new Spaceship());
+    }
+
+    if (Math.random() < this.planetChance) {
+      this.Planets.push(new Planet());
+    }
+
+    //pushen van obstacles, sterren & infinity stones naar 't scherm toe met een random getal
+
     for (let b of this.stars) {
       let hit = this.checkCollision(
         this.thanos.getRectangle(),
@@ -60,11 +74,6 @@ class Playscreen {
       b.update();
     }
 
-    if (this.life == 0) {
-      this.game.emptyScreen();
-      this.game.showGameOver(new GameOver(this.game));
-    }
-
     for (let e of this.obstacle) {
       if (this.checkCollision(this.thanos.getRectangle(), e.getRectangle())) {
         this.life -= 1;
@@ -73,6 +82,13 @@ class Playscreen {
       }
       e.update();
     }
+
+    if (this.life == 0) {
+      this.game.emptyScreen();
+      this.game.showGameOver(new GameOver(this.game));
+    }
+
+    //Als je 0 levens hebt ben je dood
 
     for (let g of this.infinitystones) {
       if (this.checkCollision(this.thanos.getRectangle(), g.getRectangle())) {
@@ -84,11 +100,26 @@ class Playscreen {
       g.update();
     }
 
+    if (this.stone == 6) {
+      this.game.emptyScreen();
+      this.game.showGameWon(new GameWon(this.game));
+    }
+
+    // Als je 6 stenen hebt gekregen dan heb je gewonnen
+
+    for (let h of this.SpaceShip) {
+      h.update();
+    }
+
+    for (let i of this.Planets) {
+      i.update();
+    }
+
     this.thanos.update();
     this.background.update();
   }
 
-  public checkCollision(a: ClientRect, b: ClientRect): boolean {
+  private checkCollision(a: ClientRect, b: ClientRect): boolean {
     return (
       a.left <= b.right &&
       b.left <= a.right &&
