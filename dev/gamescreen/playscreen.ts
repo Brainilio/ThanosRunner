@@ -19,7 +19,7 @@ class Playscreen {
 
   private starchance: number = 0.0025;
   private obstaclechance: number = 0.0025;
-  private infinitychance: number = 0.0001;
+  private infinitychance: number = 0.0003;
   private spaceShipchance: number = 0.0002;
   private planetChance: number = 0.0003;
   private breakerChance: number = 0;
