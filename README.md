@@ -20,6 +20,11 @@ infinity stones je pakt
 - Als je 6 infinity stones hebt, dan heb je gewonnen
 - Als je 0 levens hebt, dan ben je dood en eindigt het spel 
 
+Muziek: 
+- Je kan later dan het startscherm je muziek niet op pauze zetten dus heb ik een return knop toegevoegd. 
+- Je progress zal wel verloren zijn, maar je kan zo wel je muziek op pauze zetten als je op de return knop klikt. 
+
+
 ***Installatie***
 
 1. Download het Github project
