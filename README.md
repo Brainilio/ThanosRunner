@@ -107,6 +107,12 @@ Zoals je kan zien kunnen alle gameobject kinderen dezelfde functies oproepen die
 Omdat mijn background bestaat uit een space en ene ground is het een beetje stom om die beide aan te roepen in mijn `playscreen.ts` dus heb ik een `infiniteloop.ts` bestand gemaakt die `space & ground` als inheritance hebben. 
 in `background.ts` maak ik dan weer gebruik van composition om de space & ground op te roepen en de update functies daaruit op te roepen zodat ik alleen `background.ts` hoef op te roepen in mijn `playscreen. `
 
+***Klassendiagram***
+![alt text](https://raw.githubusercontent.com/Brainilio/ThanosRunner/master/UMLklassendiagram.png)
+
+Link naar draw.io: 
+https://drive.google.com/file/d/1_1Mz5FX-5jd2kdDC1slfFt7MwiDw2Lth/view?usp=sharing
+
 ***Peer Review*** 
 Dit is de link naar de peer review die is gedaan op mijn project: 
 https://github.com/Brainilio/ThanosRunner/issues/1
