@@ -504,10 +504,6 @@ var Playscreen = (function () {
             a.top <= b.bottom &&
             b.top <= a.bottom);
     };
-    Playscreen.prototype.return = function () {
-        this.game.emptyScreen();
-        this.game.showStartScreen(new Startscreen(this.game));
-    };
     return Playscreen;
 }());
 window.addEventListener("load", function () { return new Game(); });

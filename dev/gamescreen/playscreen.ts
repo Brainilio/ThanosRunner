@@ -147,11 +147,6 @@ class Playscreen {
       b.top <= a.bottom
     );
   }
-
-  private return() {
-    this.game.emptyScreen();
-    this.game.showStartScreen(new Startscreen(this.game));
-  }
 }
 
 window.addEventListener("load", () => new Game());
