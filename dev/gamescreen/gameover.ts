@@ -12,7 +12,7 @@ class GameOver {
     y.appendChild(x);
 
     let a = document.createElement("START");
-    document.body.appendChild(a);
+    y.appendChild(a);
     a.addEventListener("click", () => this.clicked());
     a.innerHTML = "GAME OVER, TRY AGAIN";
   }
