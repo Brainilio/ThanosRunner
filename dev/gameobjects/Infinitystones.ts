@@ -19,7 +19,7 @@ class Stones extends GameObject {
     this.div.style.filter = "hue-rotate(" + this.color + "deg)";
   }
 
-  update() {
+  public update() {
     this.x += this.speedX;
 
     if (this.x > window.innerWidth) {

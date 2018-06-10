@@ -13,7 +13,7 @@ class GameObject extends SpriteAnimation {
     document.body.appendChild(this.div);
   }
 
-  update() {
+  public update() {
     this.div.style.transform = `translate(${this.x}px, ${this.y}px`;
   }
 

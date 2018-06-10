@@ -35,6 +35,9 @@ class Playscreen {
     document.body.appendChild(this.stoneElement);
     this.stoneElement.innerHTML = "Stones collected: 0 out of 6";
 
+    let d = document.createElement("return");
+    document.body.appendChild(d);
+    d.addEventListener("click", () => this.return());
     this.thanos = new Thanos();
     this.background = new background();
   }
@@ -145,6 +148,11 @@ class Playscreen {
       a.top <= b.bottom &&
       b.top <= a.bottom
     );
+  }
+
+  private return() {
+    this.game.emptyScreen();
+    this.game.showStartScreen(new Startscreen(this.game));
   }
 }
 

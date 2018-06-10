@@ -14,7 +14,7 @@ class Stormbreaker extends GameObject {
     this.startLeft();
   }
 
-  update() {
+  public update() {
     this.x += this.speedX;
 
     if (this.x > window.innerWidth) {

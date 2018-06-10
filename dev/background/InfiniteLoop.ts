@@ -12,17 +12,13 @@ class infiniteLoop {
     document.body.appendChild(this.div);
   }
 
-  update() {
+  public update() {
     this.Loop();
   }
 
-  Loop() {
+  private Loop() {
     this.x -= this.xSpeed;
     this.div.style.top = `translate(${this.y}px)`;
     this.div.style.backgroundPosition = this.x + `px 500px`;
-  }
-
-  changeSpeed(g: number) {
-    this.xSpeed = g;
   }
 }

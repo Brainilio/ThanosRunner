@@ -1,5 +1,4 @@
 class Startscreen {
-  private element: HTMLElement;
   private game: Game;
 
   constructor(g: Game) {
@@ -15,10 +14,13 @@ class Startscreen {
       "Sup. 43/m/Titan. Not tryna catch feelings, just stones. Let's chill.";
     document.body.appendChild(y);
 
-    this.element = document.createElement("START");
-    document.body.appendChild(this.element);
-    this.element.addEventListener("click", () => this.clicked());
-    this.element.innerHTML = "HELP THANOS GET THE INFINITY STONES";
+    var a = document.createElement("START");
+    document.body.appendChild(a);
+    a.addEventListener("click", () => this.clicked());
+    a.innerHTML = "HELP THANOS GET THE INFINITY STONES";
+
+    var b = document.createElement("startsong");
+    document.body.appendChild(b);
   }
 
   public update() {}

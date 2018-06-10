@@ -118,9 +118,6 @@ var infiniteLoop = (function () {
         this.div.style.top = "translate(" + this.y + "px)";
         this.div.style.backgroundPosition = this.x + "px 500px";
     };
-    infiniteLoop.prototype.changeSpeed = function (g) {
-        this.xSpeed = g;
-    };
     return infiniteLoop;
 }());
 var background = (function () {
@@ -393,6 +390,7 @@ var GameWon = (function () {
 }());
 var Playscreen = (function () {
     function Playscreen(g) {
+        var _this = this;
         this.life = 20;
         this.stone = 0;
         this.infinitystones = [];
@@ -414,6 +412,9 @@ var Playscreen = (function () {
         this.stoneElement = document.createElement("stonescore");
         document.body.appendChild(this.stoneElement);
         this.stoneElement.innerHTML = "Stones collected: 0 out of 6";
+        var d = document.createElement("return");
+        document.body.appendChild(d);
+        d.addEventListener("click", function () { return _this.return(); });
         this.thanos = new Thanos();
         this.background = new background();
     }
@@ -502,6 +503,10 @@ var Playscreen = (function () {
             a.top <= b.bottom &&
             b.top <= a.bottom);
     };
+    Playscreen.prototype.return = function () {
+        this.game.emptyScreen();
+        this.game.showStartScreen(new Startscreen(this.game));
+    };
     return Playscreen;
 }());
 window.addEventListener("load", function () { return new Game(); });
@@ -517,10 +522,12 @@ var Startscreen = (function () {
         y.innerHTML =
             "Sup. 43/m/Titan. Not tryna catch feelings, just stones. Let's chill.";
         document.body.appendChild(y);
-        this.element = document.createElement("START");
-        document.body.appendChild(this.element);
-        this.element.addEventListener("click", function () { return _this.clicked(); });
-        this.element.innerHTML = "HELP THANOS GET THE INFINITY STONES";
+        var a = document.createElement("START");
+        document.body.appendChild(a);
+        a.addEventListener("click", function () { return _this.clicked(); });
+        a.innerHTML = "HELP THANOS GET THE INFINITY STONES";
+        var b = document.createElement("startsong");
+        document.body.appendChild(b);
     }
     Startscreen.prototype.update = function () { };
     Startscreen.prototype.clicked = function () {
