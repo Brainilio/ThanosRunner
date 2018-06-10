@@ -113,3 +113,7 @@ https://github.com/Brainilio/ThanosRunner/issues/1
 
 En dit is de link naar de peer review die ik zelf heb uitgevoerd op Danielle's project: 
 https://github.com/madameJeanette/fluffyGameWork/issues/2
+
+
+***Uitdaging***
+Ik heb de library HowlerJS gebruikt zodat ik muziek kan afspelen in mijn game. 
