@@ -11,7 +11,7 @@ class GameOver {
     x.setAttribute("src", "img/thanos-walkf.gif");
     y.appendChild(x);
 
-    let a = document.createElement("START");
+    let a = document.createElement("END");
     y.appendChild(a);
     a.addEventListener("click", () => this.clicked());
     a.innerHTML = "GAME OVER, TRY AGAIN";

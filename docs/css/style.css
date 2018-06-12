@@ -249,6 +249,30 @@ start:active {
   transform: translateY(4px);
 }
 
+end {
+  margin: 5%;
+  text-align: center;
+  border: 3px solid purple;
+  font-family: "Press Start 2P", cursive;
+  color: white;
+  padding: 20px;
+  position: fixed;
+  width: 25%;
+  left: 30%;
+  top: 50%;
+}
+
+end:hover {
+  transition: background-color 0.5s;
+  background-color: purple;
+}
+
+end:active {
+  background-color: pink;
+  box-shadow: 0 5px red;
+  transform: translateY(4px);
+}
+
 audio {
   display: block;
   background-color: purple;
