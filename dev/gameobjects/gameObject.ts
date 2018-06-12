@@ -26,7 +26,7 @@ class GameObject extends SpriteAnimation {
   public Spritemove(b: number) {
     this.speedcounter++;
 
-    let framerate = 8;
+    let framerate = 5;
     if (this.speedcounter % framerate == 0) {
       this.frame++;
     }

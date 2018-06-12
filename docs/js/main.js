@@ -39,7 +39,7 @@ var GameObject = (function (_super) {
     };
     GameObject.prototype.Spritemove = function (b) {
         this.speedcounter++;
-        var framerate = 8;
+        var framerate = 5;
         if (this.speedcounter % framerate == 0) {
             this.frame++;
         }
@@ -275,13 +275,13 @@ var Thanos = (function (_super) {
     Thanos.prototype.onKeyDown = function (e) {
         switch (e.keyCode) {
             case this.rightkey:
-                this.leftSpeed = 5;
+                this.leftSpeed = 8;
                 break;
             case this.leftkey:
-                this.rightSpeed = 5;
+                this.rightSpeed = 8;
                 break;
             case this.upkey:
-                this.upSpeed = 5;
+                this.upSpeed = 15;
         }
     };
     Thanos.prototype.onKeyUp = function (e) {
@@ -293,7 +293,7 @@ var Thanos = (function (_super) {
                 this.rightSpeed = 0;
                 break;
             case this.upkey:
-                this.upSpeed = -5;
+                this.upSpeed = -10;
         }
     };
     Thanos.prototype.update = function () {
@@ -360,8 +360,8 @@ var GameOver = (function () {
         x.setAttribute("class", "thanosloses");
         x.setAttribute("src", "img/thanos-walkf.gif");
         y.appendChild(x);
-        var a = document.createElement("START");
-        document.body.appendChild(a);
+        var a = document.createElement("END");
+        y.appendChild(a);
         a.addEventListener("click", function () { return _this.clicked(); });
         a.innerHTML = "GAME OVER, TRY AGAIN";
     }
@@ -467,7 +467,7 @@ var Playscreen = (function () {
             }
             k.update();
         }
-        if (this.life == 0) {
+        if (this.life < 0) {
             this.game.emptyScreen();
             this.game.showGameOver(new GameOver(this.game));
         }

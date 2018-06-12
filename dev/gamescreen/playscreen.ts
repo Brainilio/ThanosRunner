@@ -100,7 +100,7 @@ class Playscreen {
       k.update();
     }
 
-    if (this.life == 0) {
+    if (this.life < 0) {
       this.game.emptyScreen();
       this.game.showGameOver(new GameOver(this.game));
     }
