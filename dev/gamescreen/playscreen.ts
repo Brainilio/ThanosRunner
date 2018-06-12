@@ -17,9 +17,9 @@ class Playscreen {
   private Planets: Planet[] = [];
   private breaker: Stormbreaker[] = [];
 
-  private starchance: number = 0.0025;
-  private obstaclechance: number = 0.0025;
-  private infinitychance: number = 0.0003;
+  private starchance: number = 0.0040;
+  private obstaclechance: number = 0.0035;
+  private infinitychance: number = 0.0008;
   private spaceShipchance: number = 0.0002;
   private planetChance: number = 0.0003;
   private breakerChance: number = 0;
