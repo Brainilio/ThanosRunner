@@ -82,6 +82,8 @@ class Playscreen {
       b.update();
     }
 
+    //als stars thanos hit dan gaan er 2 levens af
+
     for (let e of this.obstacle) {
       if (this.checkCollision(this.thanos.getRectangle(), e.getRectangle())) {
         this.life -= 1;
@@ -91,6 +93,8 @@ class Playscreen {
       e.update();
     }
 
+    //als de hulk thanos hit dan gaat er maar 1 leven af 
+
     for (let k of this.breaker) {
       if (this.checkCollision(this.thanos.getRectangle(), k.getRectangle())) {
         this.life -= 5;
@@ -99,6 +103,8 @@ class Playscreen {
       }
       k.update();
     }
+
+    //als stormbreaker thanos hit dan gaan er 5 levens af
 
     if (this.life < 0) {
       this.game.emptyScreen();
@@ -120,7 +126,9 @@ class Playscreen {
       g.update();
     }
 
-    if (this.stone == 6) {
+    //als je een infinity stone pakt dan komt er 1 bij
+
+    if (this.stone > 6) {
       this.game.emptyScreen();
       this.game.showGameWon(new GameWon(this.game));
     }
@@ -135,8 +143,12 @@ class Playscreen {
       i.update();
     }
 
+    //updaten van ambient objects
+
     this.thanos.update();
     this.background.update();
+
+    //updaten van thanos & background scroll
   }
 
   private checkCollision(a: ClientRect, b: ClientRect): boolean {

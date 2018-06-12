@@ -483,7 +483,7 @@ var Playscreen = (function () {
             }
             g.update();
         }
-        if (this.stone == 6) {
+        if (this.stone > 6) {
             this.game.emptyScreen();
             this.game.showGameWon(new GameWon(this.game));
         }
