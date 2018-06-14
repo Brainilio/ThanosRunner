@@ -55,7 +55,7 @@ dat je dezelfde properties als die van je parent kan gebruiken ) het kunnen aanp
 Encapsulation is door al mijn dev bestanden verwerkt. 
 
 Voorbeelden:
-dev/gamescreen/playscreen
+`dev/gamescreen/playscreen`
 ..
 class Playscreen {
   private thanos: Thanos;
@@ -87,22 +87,23 @@ class Playscreen {
  constructor(g: Game) {
     this.game = g;
 
-    let y = document.getElementsByTagName("foreground")[0];
+   let y = document.getElementsByTagName("foreground")[0];
 
-    this.lifeElement = document.createElement("life");
-    y.appendChild(this.lifeElement);
-    this.lifeElement.innerHTML = "Lives:  " + this.life;
+   this.lifeElement = document.createElement("life");
+   y.appendChild(this.lifeElement);
+   this.lifeElement.innerHTML = "Lives:  " + this.life;
 
-    this.stoneElement = document.createElement("stonescore");
-    y.appendChild(this.stoneElement);
-    this.stoneElement.innerHTML = "Stones collected: 0 out of 6";
+   this.stoneElement = document.createElement("stonescore");
+   y.appendChild(this.stoneElement);
+   this.stoneElement.innerHTML = "Stones collected: 0 out of 6";
 
-    this.thanos = new Thanos();
-    this.background = new background(); } 
+   this.thanos = new Thanos();
+   this.background = new background(); } 
 
 
 
-dev/gameobjects/animation.ts/
+`dev/gameobjects/animation.ts/`
+
 ..
  class SpriteAnimation {
   protected frames = 10;
