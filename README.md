@@ -61,18 +61,15 @@ Voorbeelden:
 
 `class Playscreen {
  private thanos: Thanos;
- private background: background;` 
-
-  private lifeElement: HTMLElement;
-  private stoneElement: HTMLElement;
-
-  private life: number = 20;
-  private stone: number = 0;
-
-  private game: Game;`
+ private background: background;
+ private lifeElement: HTMLElement;
+ private stoneElement: HTMLElement;
+ private life: number = 20;
+ private stone: number = 0;
+ private game: Game;`
   
 
-  `private infinitystones: Stones[] = [];
+  private infinitystones: Stones[] = [];
   private stars: Star[] = [];
   private obstacle: Obstacle[] = [];
   private SpaceShip: Spaceship[] = [];
