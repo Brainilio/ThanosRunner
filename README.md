@@ -69,10 +69,10 @@ Voorbeelden:
   private life: number = 20;
   private stone: number = 0;
 
-  private game: Game;
+  private game: Game;`
   
 
-  private infinitystones: Stones[] = [];
+  `private infinitystones: Stones[] = [];
   private stars: Star[] = [];
   private obstacle: Obstacle[] = [];
   private SpaceShip: Spaceship[] = [];
@@ -84,9 +84,9 @@ Voorbeelden:
   private infinitychance: number = 0.0008;
   private spaceShipchance: number = 0.0002;
   private planetChance: number = 0.0003;
-  private breakerChance: number = 0;
+  private breakerChance: number = 0;`
 
- constructor(g: Game) {
+ `constructor(g: Game) {
     this.game = g;
 
    let y = document.getElementsByTagName("foreground")[0];
@@ -100,8 +100,8 @@ Voorbeelden:
    this.stoneElement.innerHTML = "Stones collected: 0 out of 6";
 
    this.thanos = new Thanos();
-   this.background = new background(); } 
-`
+   this.background = new background(); }` 
+
 
 
 `dev/gameobjects/animation.ts/`
