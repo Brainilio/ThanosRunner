@@ -54,6 +54,64 @@ dat je dezelfde properties als die van je parent kan gebruiken ) het kunnen aanp
 
 Encapsulation is door al mijn dev bestanden verwerkt. 
 
+Voorbeelden:
+`dev/gamescreen/playscreen`
+..
+`class Playscreen {
+  private thanos: Thanos;
+  private background: background;
+
+  private lifeElement: HTMLElement;
+  private stoneElement: HTMLElement;
+
+  private life: number = 20;
+  private stone: number = 0;
+
+  private game: Game;
+
+  private infinitystones: Stones[] = [];
+  private stars: Star[] = [];
+  private obstacle: Obstacle[] = [];
+  private SpaceShip: Spaceship[] = [];
+  private Planets: Planet[] = [];
+  private breaker: Stormbreaker[] = [];
+
+  private starchance: number = 0.0040;
+  private obstaclechance: number = 0.0035;
+  private infinitychance: number = 0.0008;
+  private spaceShipchance: number = 0.0002;
+  private planetChance: number = 0.0003;
+  private breakerChance: number = 0;
+
+  constructor(g: Game) {
+    this.game = g;
+
+    let y = document.getElementsByTagName("foreground")[0];
+
+    this.lifeElement = document.createElement("life");
+    y.appendChild(this.lifeElement);
+    this.lifeElement.innerHTML = "Lives:  " + this.life;
+
+    this.stoneElement = document.createElement("stonescore");
+    y.appendChild(this.stoneElement);
+    this.stoneElement.innerHTML = "Stones collected: 0 out of 6";
+
+    this.thanos = new Thanos();
+    this.background = new background();
+}`
+`dev/gameobjects/animation.ts/`
+..
+`class SpriteAnimation {
+  protected frames = 10;
+  protected frame = 0;
+  protected frameWidth = 102;
+  protected speedcounter = 0;
+
+  constructor() {}
+
+  public update() {}
+}`
+
 - *Classes*
 
 Ik heb classes uitgevoerd in: 
@@ -61,6 +119,20 @@ Ik heb classes uitgevoerd in:
 Als je in `dev/gameobjects/gameObject.ts` kijkt zie je ook dat ik een aantal functies heb zoals `randomnumber, spritemove, dead & getrectangle` die door mijn bestanden heen worden gebruikt. 
 in `dev/gamescreen/game.ts` maak ik ook classes aan die in andere screens opgeroepen wordt. 
 
+Voorbeelden: 
+
+`dev/gamescreen/startscreen.ts`
+
+`class Startscreen {
+  private game: Game;
+
+  constructor(g: Game) {
+this.game = g;
+
+private clicked() {
+    this.game.emptyScreen();
+    this.game.showPlayScreen(new Playscreen(this.game));
+}`
 
 - *Composition*
 
@@ -76,6 +148,54 @@ in `startscreen` ook weer voor dezelfe reden als gameover
 
 In mijn `playscreen` roep ik mijn `gameobjects` op en mijn `background` op zodat ik ze uiteindelijk kan gebruiken. 
 Dit is handiger zodat je netter in aparte bestanden kan werken en niet alles in 1 bestand hoeft te doen en heen en weer hoeft te roepen. Dit is veel handiger en elke bestand is zo unieker en netter. 
+
+voorbeelden: 
+`dev/gamescreen/playscreen`
+..
+
+`class Playscreen {
+  private thanos: Thanos;
+private background: background;
+private infinitystones: Stones[] = [];
+  private stars: Star[] = [];
+  private obstacle: Obstacle[] = [];
+  private SpaceShip: Spaceship[] = [];
+  private Planets: Planet[] = [];
+private breaker: Stormbreaker[] = [];
+
+ constructor(g: Game) {
+    this.thanos = new Thanos();
+    this.background = new background();
+}
+
+ public update() {
+    if (Math.random() < this.infinitychance) {
+      this.infinitystones.push(new Stones());
+    }
+
+    if (Math.random() < this.obstaclechance) {
+      this.obstacle.push(new Obstacle());
+    }
+
+    if (Math.random() < this.starchance) {
+      this.stars.push(new Star());
+}
+
+ if (Math.random() < this.breakerChance) {
+      this.breaker.push(new Stormbreaker());
+    }
+
+    if (Math.random() < this.spaceShipchance) {
+      this.SpaceShip.push(new Spaceship());
+    }
+
+    if (Math.random() < this.planetChance) {
+      this.Planets.push(new Planet());
+}
+this.thanos.update();
+this.background.update();
+}`
+
 
 - *Inheritance* 
 
@@ -107,6 +227,106 @@ Zoals je kan zien kunnen alle gameobject kinderen dezelfde functies oproepen die
 Omdat mijn background bestaat uit een space en ene ground is het een beetje stom om die beide aan te roepen in mijn `playscreen.ts` dus heb ik een `infiniteloop.ts` bestand gemaakt die `space & ground` als inheritance hebben. 
 in `background.ts` maak ik dan weer gebruik van composition om de space & ground op te roepen en de update functies daaruit op te roepen zodat ik alleen `background.ts` hoef op te roepen in mijn `playscreen. `
 
+voorbeelden: 
+`dev/gameobjects/gameobject`
+`dev/gameobjects/spriteanimation`
+`dev/gameobjects/thanos`
+
+`class SpriteAnimation {
+  protected frames = 10;
+  protected frame = 0;
+  protected frameWidth = 102;
+  protected speedcounter = 0;
+
+  constructor() {}
+
+  public update() {}
+}
+
+class GameObject extends SpriteAnimation {
+  protected x: number;
+  protected y: number;
+  protected div: HTMLElement;
+
+  constructor(el: any, x: number, y: number) {
+    super();
+    this.x = x;
+    this.y = y;
+    let a = document.getElementsByTagName("foreground")[0];
+    this.div = document.createElement(el);
+    a.appendChild(this.div);
+  }
+
+  public update() {
+    this.div.style.transform = `translate(${this.x}px, ${this.y}px`;
+  }
+
+  public randomNumber(min: number, max: number) {
+    let a: number = Math.floor(Math.random() * (max - min + 3)) + min;
+    return a;
+  }
+
+  public Spritemove(b: number) {
+    this.speedcounter++;
+
+    let framerate = 5;
+    if (this.speedcounter % framerate == 0) {
+      this.frame++;
+    }
+    if (this.frame >= this.frames) this.frame = 1;
+
+    let pos = 0 - this.frame * this.frameWidth;
+    this.div.style.backgroundPosition = pos + `px ${b}px`;
+  }
+
+  public getRectangle() {
+    return this.div.getBoundingClientRect();
+  }
+
+  public dead() {
+    this.div.remove();
+  }
+}
+
+class Thanos extends GameObject {
+
+  constructor() {
+    super("thanos", 450, 450);
+
+    this.update();
+  }
+
+  public update() {
+    this.y = this.y - this.upSpeed;
+    this.x = this.x - this.leftSpeed + this.rightSpeed;
+
+    if (this.y > 450) {
+      this.y = 450;
+      this.upSpeed = 0;
+    }
+
+    if (this.y < 0) {
+      this.upSpeed = -5;
+    }
+
+    if (this.x > 1850) {
+      this.rightSpeed = -1;
+    }
+
+    if (this.x < 0) {
+      this.x = 0;
+    }
+
+    console.log(this.x);
+
+    this.Spritemove(-555);
+
+    this.div.style.left = `${this.x}px`;
+    this.div.style.top = `${this.y}px`;
+  }
+}
+
+` 
 ***Klassendiagram***
 ![alt text](https://raw.githubusercontent.com/Brainilio/ThanosRunner/master/UMLklassendiagram.png)
 
