@@ -55,9 +55,9 @@ dat je dezelfde properties als die van je parent kan gebruiken ) het kunnen aanp
 Encapsulation is door al mijn dev bestanden verwerkt. 
 
 Voorbeelden:
-`dev/gamescreen/playscreen`
+dev/gamescreen/playscreen
 ..
-`class Playscreen {
+class Playscreen {
   private thanos: Thanos;
   private background: background;
 
@@ -68,6 +68,7 @@ Voorbeelden:
   private stone: number = 0;
 
   private game: Game;
+  
 
   private infinitystones: Stones[] = [];
   private stars: Star[] = [];
@@ -83,7 +84,7 @@ Voorbeelden:
   private planetChance: number = 0.0003;
   private breakerChance: number = 0;
 
-  constructor(g: Game) {
+ constructor(g: Game) {
     this.game = g;
 
     let y = document.getElementsByTagName("foreground")[0];
@@ -97,11 +98,13 @@ Voorbeelden:
     this.stoneElement.innerHTML = "Stones collected: 0 out of 6";
 
     this.thanos = new Thanos();
-    this.background = new background();
-}`
-`dev/gameobjects/animation.ts/`
+    this.background = new background(); } 
+
+
+
+dev/gameobjects/animation.ts/
 ..
-`class SpriteAnimation {
+ class SpriteAnimation {
   protected frames = 10;
   protected frame = 0;
   protected frameWidth = 102;
@@ -110,7 +113,7 @@ Voorbeelden:
   constructor() {}
 
   public update() {}
-}`
+}
 
 - *Classes*
 
@@ -123,7 +126,7 @@ Voorbeelden:
 
 `dev/gamescreen/startscreen.ts`
 
-`class Startscreen {
+class Startscreen {
   private game: Game;
 
   constructor(g: Game) {
@@ -132,7 +135,7 @@ this.game = g;
 private clicked() {
     this.game.emptyScreen();
     this.game.showPlayScreen(new Playscreen(this.game));
-}`
+}
 
 - *Composition*
 
@@ -153,7 +156,7 @@ voorbeelden:
 `dev/gamescreen/playscreen`
 ..
 
-`class Playscreen {
+class Playscreen {
   private thanos: Thanos;
 private background: background;
 private infinitystones: Stones[] = [];
@@ -172,29 +175,29 @@ private breaker: Stormbreaker[] = [];
     if (Math.random() < this.infinitychance) {
       this.infinitystones.push(new Stones());
     }
+    
+   if (Math.random() < this.obstaclechance) {
+     this.obstacle.push(new Obstacle());
+   }
 
-    if (Math.random() < this.obstaclechance) {
-      this.obstacle.push(new Obstacle());
-    }
-
-    if (Math.random() < this.starchance) {
-      this.stars.push(new Star());
+   if (Math.random() < this.starchance) {
+    this.stars.push(new Star());
 }
 
  if (Math.random() < this.breakerChance) {
       this.breaker.push(new Stormbreaker());
     }
 
-    if (Math.random() < this.spaceShipchance) {
-      this.SpaceShip.push(new Spaceship());
-    }
+   if (Math.random() < this.spaceShipchance) {
+     this.SpaceShip.push(new Spaceship());
+  }
 
-    if (Math.random() < this.planetChance) {
-      this.Planets.push(new Planet());
+   if (Math.random() < this.planetChance) {
+     this.Planets.push(new Planet());
 }
 this.thanos.update();
 this.background.update();
-}`
+}
 
 
 - *Inheritance* 
@@ -232,7 +235,7 @@ voorbeelden:
 `dev/gameobjects/spriteanimation`
 `dev/gameobjects/thanos`
 
-`class SpriteAnimation {
+class SpriteAnimation {
   protected frames = 10;
   protected frame = 0;
   protected frameWidth = 102;
@@ -258,7 +261,7 @@ class GameObject extends SpriteAnimation {
   }
 
   public update() {
-    this.div.style.transform = `translate(${this.x}px, ${this.y}px`;
+    this.div.style.transform = translate(${this.x}px, ${this.y}px;
   }
 
   public randomNumber(min: number, max: number) {
@@ -269,14 +272,14 @@ class GameObject extends SpriteAnimation {
   public Spritemove(b: number) {
     this.speedcounter++;
 
-    let framerate = 5;
-    if (this.speedcounter % framerate == 0) {
+   let framerate = 5;
+   if (this.speedcounter % framerate == 0) {
       this.frame++;
     }
     if (this.frame >= this.frames) this.frame = 1;
 
-    let pos = 0 - this.frame * this.frameWidth;
-    this.div.style.backgroundPosition = pos + `px ${b}px`;
+   let pos = 0 - this.frame * this.frameWidth;
+   this.div.style.backgroundPosition = pos + `px ${b}px`;
   }
 
   public getRectangle() {
@@ -293,40 +296,40 @@ class Thanos extends GameObject {
   constructor() {
     super("thanos", 450, 450);
 
-    this.update();
+   this.update();
   }
 
   public update() {
     this.y = this.y - this.upSpeed;
     this.x = this.x - this.leftSpeed + this.rightSpeed;
 
-    if (this.y > 450) {
-      this.y = 450;
+   if (this.y > 450) {
+     this.y = 450;
       this.upSpeed = 0;
     }
 
-    if (this.y < 0) {
+   if (this.y < 0) {
       this.upSpeed = -5;
     }
 
-    if (this.x > 1850) {
-      this.rightSpeed = -1;
+   if (this.x > 1850) {
+     this.rightSpeed = -1;
+   }
+
+   if (this.x < 0) {
+     this.x = 0;
     }
 
-    if (this.x < 0) {
-      this.x = 0;
-    }
+   console.log(this.x);
 
-    console.log(this.x);
+   this.Spritemove(-555);
 
-    this.Spritemove(-555);
-
-    this.div.style.left = `${this.x}px`;
-    this.div.style.top = `${this.y}px`;
+   this.div.style.left =${this.x}px;
+   this.div.style.top = ${this.y}px;
   }
 }
 
-` 
+
 ***Klassendiagram***
 ![alt text](https://raw.githubusercontent.com/Brainilio/ThanosRunner/master/UMLklassendiagram.png)
 
