@@ -59,9 +59,9 @@ Voorbeelden:
 ..
 
 
-`class Playscreen {`
-  `private thanos: Thanos;`
-  `private background: background;`
+`class Playscreen {
+ private thanos: Thanos;
+ private background: background;` 
 
   private lifeElement: HTMLElement;
   private stoneElement: HTMLElement;
