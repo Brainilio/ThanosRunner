@@ -67,20 +67,23 @@ class Playscreen {
  private stoneElement: HTMLElement;
  private life: number = 20;
  private stone: number = 0;
+ 
  private game: Game;
  private infinitystones: Stones[] = [];
  private stars: Star[] = [];
  private obstacle: Obstacle[] = [];
+ 
  private SpaceShip: Spaceship[] = [];
  private Planets: Planet[] = [];
  private breaker: Stormbreaker[] = [];
+ 
  private starchance: number = 0.0040;
  private obstaclechance: number = 0.0035;
  private infinitychance: number = 0.0008;
  private spaceShipchance: number = 0.0002;
  private planetChance: number = 0.0003;
  private breakerChance: number = 0;
- ```
+
 
  constructor(g: Game) {
     this.game = g;
@@ -97,12 +100,13 @@ class Playscreen {
 
    this.thanos = new Thanos();
    this.background = new background(); }` 
-
+ ```
 
 
 `dev/gameobjects/animation.ts/`
 
 ..
+```
  class SpriteAnimation {
   protected frames = 10;
   protected frame = 0;
@@ -113,7 +117,7 @@ class Playscreen {
 
   public update() {}
 }
-
+```
 - *Classes*
 
 Ik heb classes uitgevoerd in: 
@@ -125,6 +129,7 @@ Voorbeelden:
 
 `dev/gamescreen/startscreen.ts`
 
+```
 class Startscreen {
   private game: Game;
 
@@ -135,6 +140,7 @@ private clicked() {
     this.game.emptyScreen();
     this.game.showPlayScreen(new Playscreen(this.game));
 }
+```
 
 - *Composition*
 
@@ -155,10 +161,11 @@ voorbeelden:
 `dev/gamescreen/playscreen`
 ..
 
+```
 class Playscreen {
   private thanos: Thanos;
-private background: background;
-private infinitystones: Stones[] = [];
+  private background: background;
+  private infinitystones: Stones[] = [];
   private stars: Star[] = [];
   private obstacle: Obstacle[] = [];
   private SpaceShip: Spaceship[] = [];
@@ -197,6 +204,7 @@ private breaker: Stormbreaker[] = [];
 this.thanos.update();
 this.background.update();
 }
+```
 
 
 - *Inheritance* 
@@ -234,6 +242,7 @@ voorbeelden:
 `dev/gameobjects/spriteanimation`
 `dev/gameobjects/thanos`
 
+```
 class SpriteAnimation {
   protected frames = 10;
   protected frame = 0;
@@ -327,7 +336,7 @@ class Thanos extends GameObject {
    this.div.style.top = ${this.y}px;
   }
 }
-
+```
 
 ***Klassendiagram***
 ![alt text](https://raw.githubusercontent.com/Brainilio/ThanosRunner/master/UMLklassendiagram.png)
