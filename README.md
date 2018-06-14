@@ -57,7 +57,9 @@ Encapsulation is door al mijn dev bestanden verwerkt.
 Voorbeelden:
 `dev/gamescreen/playscreen`
 ..
-class Playscreen {
+
+
+`class Playscreen {
   private thanos: Thanos;
   private background: background;
 
@@ -99,7 +101,7 @@ class Playscreen {
 
    this.thanos = new Thanos();
    this.background = new background(); } 
-
+`
 
 
 `dev/gameobjects/animation.ts/`
