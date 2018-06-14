@@ -59,7 +59,8 @@ Voorbeelden:
 ..
 
 
-`class Playscreen {
+```
+class Playscreen {
  private thanos: Thanos;
  private background: background;
  private lifeElement: HTMLElement;
@@ -78,7 +79,8 @@ Voorbeelden:
  private infinitychance: number = 0.0008;
  private spaceShipchance: number = 0.0002;
  private planetChance: number = 0.0003;
- private breakerChance: number = 0;`
+ private breakerChance: number = 0;
+ ```
 
  constructor(g: Game) {
     this.game = g;
