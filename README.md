@@ -66,24 +66,21 @@ Voorbeelden:
  private stoneElement: HTMLElement;
  private life: number = 20;
  private stone: number = 0;
- private game: Game;`
-  
+ private game: Game;
+ private infinitystones: Stones[] = [];
+ private stars: Star[] = [];
+ private obstacle: Obstacle[] = [];
+ private SpaceShip: Spaceship[] = [];
+ private Planets: Planet[] = [];
+ private breaker: Stormbreaker[] = [];
+ private starchance: number = 0.0040;
+ private obstaclechance: number = 0.0035;
+ private infinitychance: number = 0.0008;
+ private spaceShipchance: number = 0.0002;
+ private planetChance: number = 0.0003;
+ private breakerChance: number = 0;`
 
-  private infinitystones: Stones[] = [];
-  private stars: Star[] = [];
-  private obstacle: Obstacle[] = [];
-  private SpaceShip: Spaceship[] = [];
-  private Planets: Planet[] = [];
-  private breaker: Stormbreaker[] = [];
-
-  private starchance: number = 0.0040;
-  private obstaclechance: number = 0.0035;
-  private infinitychance: number = 0.0008;
-  private spaceShipchance: number = 0.0002;
-  private planetChance: number = 0.0003;
-  private breakerChance: number = 0;`
-
- `constructor(g: Game) {
+ constructor(g: Game) {
     this.game = g;
 
    let y = document.getElementsByTagName("foreground")[0];
